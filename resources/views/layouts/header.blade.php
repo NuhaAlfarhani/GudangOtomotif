@@ -13,10 +13,8 @@
 </head>
 <body class="sb-nav-fixed">
 
-    <div>
-        @yield('content')
-    </div>
-    
+    @include('components.navbar')
+    @include('components.sidenav')
 
     @include('layouts.footer')
 

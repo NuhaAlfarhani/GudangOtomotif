@@ -21,10 +21,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Route to masuk
 Route::get('/masuk', function(){
-    return view('masuk');
+    return view('page/masuk');
 });
 
 // Route to keluar
 Route::get('/keluar', function(){
-    return view('keluar');
+    return view('page/keluar');
 });
