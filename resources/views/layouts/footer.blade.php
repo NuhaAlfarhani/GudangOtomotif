@@ -2,7 +2,13 @@
     <div class="container-fluid" style="position:relative">
         <div class="d-flex align-items-center justify-content-between small">
             <div class="text-muted" style="margin-left:13rem">
-                Copyright &copy; Arya Ferdian X <a href="https://github.com/NuhaAlfarhani/" target="_blank" rel="noopener noreferrer">Nuha Alfarhani</a>
+                Copyright &copy;
+                
+                Arya Ferdian X
+                
+                <a href="https://github.com/NuhaAlfarhani/" target="_blank" rel="noopener noreferrer">
+                    Nuha Alfarhani
+                </a>
             </div>
 
             <div>

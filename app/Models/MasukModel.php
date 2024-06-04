@@ -15,12 +15,15 @@ class MasukModel extends Model
 
     protected $fillable = [
         'id_barang',
+        'nama',
         'jumlah',
         'tanggal'
     ];
 
     public function barang()
     {
-        return $this->belongsTo(BarangModel::class, 'id_barang', 'id_barang');
+        return $this
+        ->belongsTo(BarangModel::class, 'id_barang', 'id')
+        ->belongsTo(BarangModel::class, 'nama', 'nama');
     }
 }

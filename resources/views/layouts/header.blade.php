@@ -14,7 +14,11 @@
 <body class="sb-nav-fixed">
 
     @include('components.navbar')
-    @include('components.sidenav')
+
+    <div id="layoutSidenav">
+        @include('components.sidenav')
+        @yield('content')
+    </div>
 
     @include('layouts.footer')
 

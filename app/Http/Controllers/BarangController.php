@@ -12,6 +12,6 @@ class BarangController extends Controller
     public function barangtampil(){
         $databarang = BarangModel::orderBy('id_barang', 'asc')->paginate(10);
 
-        return view('barang', ['databarang' => $databarang]);
+        return view('page/masuk', ['barang' => $databarang]);
     }
 }

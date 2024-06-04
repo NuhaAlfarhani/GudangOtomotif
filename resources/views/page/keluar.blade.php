@@ -16,9 +16,13 @@
                 
                 <div class="card mb-4">
                     <div class="card-header">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                            Tambah Barang
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+                            Tambah Data
                         </button>
+                        
+                        <button type="button" class="btn btn-info">
+                        Export Data
+                    </button>
                     </div>
 
                     <div class="card-body">
@@ -37,7 +41,19 @@
                                 </thead>
 
                                 <tbody>
-
+                                    @foreach ($barang as $brg)
+                                        <tr>
+                                            <td align="center">{{ $brg->id }}</td>
+                                            <td align="center">{{ $brg->nama_barang }}</td>
+                                            <td align="center">{{ $brg->deskripsi_lokasi }}</td>
+                                            <td align="center">{{ $brg->quantity_stock }}</td>
+                                            <td align="center">{{ $brg->tanggal }}</td>
+                                            <td align="center">
+                                                <a href="/masuk/edit/{{ $brg->id }}" class="btn btn-warning">Edit</a>
+                                                <a href="/masuk/hapus/{{ $brg->id }}" class="btn btn-danger">Hapus</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -47,5 +63,3 @@
         </main>
     </div>
 @endsection
-
-@include('layouts.footer')

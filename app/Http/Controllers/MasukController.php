@@ -21,16 +21,19 @@ class MasukController extends Controller
     //menambah data masuk
     public function masuktambah(Request $request){
         $this->validate($request, [
-            'id_barang' => 'required',
+            'id' => 'required',
             'jumlah' => 'required',
             'tanggal' => 'required'
         ]);
 
         MasukModel::create([
-            'id_barang' => $request->id_barang,
+            'id' => $request->id,
             'jumlah' => $request->jumlah,
             'tanggal' => $request->tanggal
         ]);
+
+        BarangModel::where('id', $request->id)->increment('stok', $request->jumlah);
+        
         return redirect('/masuk');
     }
 }
