@@ -8,10 +8,21 @@ use App\Models\BarangModel;
 
 class BarangController extends Controller
 {
-    //menampilkan data barang
-    public function barangtampil(){
+    public function index(){
+        $databarang = BarangModel::orderBy('id_barang', 'asc')->paginate(10);
+
+        return view('index', ['barang' => $databarang]);
+    }
+    
+    public function barangmasuk(){
         $databarang = BarangModel::orderBy('id_barang', 'asc')->paginate(10);
 
         return view('page/masuk', ['barang' => $databarang]);
+    }
+
+    public function barangkeluar(){
+        $databarang = BarangModel::orderBy('id_barang', 'asc')->paginate(10);
+
+        return view('page/keluar', ['barang' => $databarang]);
     }
 }

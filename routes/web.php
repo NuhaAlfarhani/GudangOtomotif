@@ -6,26 +6,21 @@ use App\Http\Controllers\KeluarController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [BarangController::class, 'index']);
 
 Route::get('/login', function(){
     return view('login');
 });
 
 // Route to masuk
-// Route::get('/masuk', function(){
-//     return view('page/masuk');
-// });
-Route::get('/masuk', [BarangController::class, 'barangtampil']);
+Route::get('/masuk', [BarangController::class, 'barangmasuk']);
 Route::get('/masuk/tampil', [MasukController::class, 'masuktampil'])->name('masuk');
 Route::post('/masuk/tambah', [MasukController::class, 'masuktambah']);
 Route::get('/masuk/edit/{id}', [MasukController::class, 'masukedit']);
 Route::get('/masuk/hapus/{id}', [MasukController::class, 'masukhapus']);
 
 // Route to keluar
-Route::get('/keluar', [BarangController::class, 'barangtampil']);
+Route::get('/keluar', [BarangController::class, 'barangkeluar']);
 Route::get('/keluar/tampil', [KeluarController::class, 'keluartampil'])->name('keluar');
 Route::post('/keluar/tambah', [KeluarController::class, 'keluartambah']);
 Route::get('/keluar/edit/{id}', [KeluarController::class, 'keluaredit']);

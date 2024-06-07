@@ -4,7 +4,11 @@
             <div class="text-muted" style="margin-left:13rem">
                 Copyright &copy;
                 
-                Arya Ferdian X
+                <a href="https://id.linkedin.com/in/arya-ferdian-ramadhan-putra-bba54a2b2" target="_blank" rel="noopener noreferrer">
+                    Arya Ferdian
+                </a> 
+                
+                X
                 
                 <a href="https://github.com/NuhaAlfarhani/" target="_blank" rel="noopener noreferrer">
                     Nuha Alfarhani
