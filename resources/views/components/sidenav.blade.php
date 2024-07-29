@@ -6,31 +6,44 @@
                     LIST
                 </div>
                 
+                <button class="navbar navbar-expand-lg navbar-dark bg-dark" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="color: white;">
+                    Storage Opname
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active" style="margin-left: 1rem">
+                            <a class="nav-link" href="/"><div class="sb-nav-link-icon"><i class="fas fa-warehouse"></i></div>Stock Barang</a> <span class="sr-only">(current)</span></a>
+                        </li>
+
+                        <li class="nav-item active" style="margin-left: 1rem">
+                            <a class="nav-link" href="/masuk"><div class="sb-nav-link-icon"><i class="fas fa-people-arrows"></i></div>Barang Masuk</a> <span class="sr-only">(current)</span></a>
+                        </li>
+
+                        <li class="nav-item active" style="margin-left: 1rem">
+                            <a class="nav-link" href="/keluar"><div class="sb-nav-link-icon"><i class="fas fa-truck"></i></div>Barang Keluar</a> <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                </div>
+
+                
+
                 <a class="nav-link" href="/">
-                    <div class="sb-nav-link-icon">
-                        <i class="fas fa-warehouse">
-                        </i>
-                    </div>
-
-                    Stock Barang
-                </a>
-
-                <a class="nav-link" href="/masuk">
                     <div class="sb-nav-link-icon">
                         <i class="fas fa-people-arrows">
                         </i>
                     </div>
-                    
-                    Barang Masuk
+
+                    Peminjaman Barang
                 </a>
 
-                <a class="nav-link" href="/keluar">
+                <a class="nav-link" href="/request">
                     <div class="sb-nav-link-icon">
                         <i class="fas fa-truck">
                         </i>
                     </div>
                     
-                    Barang Keluar
+                    Request Barang
                 </a>            
             </div>
         </div>

@@ -27,4 +27,9 @@ Route::post('/keluar/tambah', [KeluarController::class, 'keluartambah']);
 Route::get('/keluar/edit/{id}', [KeluarController::class, 'keluaredit']);
 Route::get('/keluar/hapus/{id}', [KeluarController::class, 'keluarhapus']);
 
+// Route to Request
+Route::get('/request', function() {
+    return view('request');
+});
+
 Auth::routes();
