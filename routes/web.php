@@ -29,7 +29,12 @@ Route::get('/keluar/hapus/{id}', [KeluarController::class, 'keluarhapus']);
 
 // Route to Request
 Route::get('/request', function() {
-    return view('request');
+    return view('page/request');
+});
+
+// Route to Pinjam
+Route::get('/pinjam', function() {
+    return view('page/pinjam');
 });
 
 Auth::routes();

@@ -30,9 +30,11 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <td style="text-align: center">Nomor</td>
-                                        <td style="text-align: center">Nama Barang</td>
-                                        <td style="text-align: center">Quantity</td>
+                                        <td style="text-align: center">PKB</td>
+                                        <td style="text-align: center">Tanggal</td>
+                                        <td style="text-align: center">Daftar Barang</td>
+                                        <td style="text-align: center">Jumlah Pinjam</td>
+                                        <td style="text-align: center">Alasan</td>
                                         <td style="text-align: center">Aksi</td>
                                     </tr>
                                 </thead>
@@ -41,8 +43,10 @@
                                     @foreach ($barang as $brg)
                                         <tr>
                                             <td style="text-align: center">{{ $brg->id }}</td>
-                                            <td style="text-align: center">{{ $brg->nama_barang }}</td>
-                                            <td style="text-align: center">{{ $brg->quantity_stock }}</td>
+                                            <td style="text-align: center">{{ $brg->tanggal }}</td>
+                                            <td style="text-align: center">{{ $brg->daftar_barang }}</td>
+                                            <td style="text-align: center">{{ $brg->jumlah_pinjam }}</td>
+                                            <td style="text-align: center">{{ $brg->alasan }}</td>
                                             <td style="text-align: center">
                                                 <a href="/masuk/edit/{{ $brg->id }}" class="btn btn-warning">Edit</a>
                                                 <a href="/masuk/hapus/{{ $brg->id }}" class="btn btn-danger">Hapus</a>
@@ -71,19 +75,35 @@
                         <form name="formdatatambah" id="formdatatambah" action="/masuk/tambah" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
-                                <label for="nama_barang" class="col-sm-4 col-form-label text-md-right">
-                                    Nama Barang
+                                <label for="daftar_barang" class="col-sm-4 col-form-label text-md-right">
+                                    Daftar Barang
                                 </label>
                                 <div class="col-md-6">
-                                    <input id="nama_barang" type="text" name="nama_barang" class="form-control" placeholder="Masukkan Nama Barang" required>
+                                    <input id="daftar_barang" type="text" name="daftar_barang" class="form-control" placeholder="Masukkan Daftar Barang" required>
                                 </div>
                                 <br>
                                 <br>
-                                <label for="quantity_stock" class="col-sm-4 col-form-label text-md-right">
+                                <label for="jumlah_pinjam" class="col-sm-4 col-form-label text-md-right">
                                     Stock
                                 </label>
                                 <div class="col-md-6">
-                                    <input id="quantity_stock" type="text" name="quantity_stock" class="form-control" placeholder="Masukkan Jumlah Barang" required>
+                                    <input id="jumlah_pinjam" type="text" name="jumlah_pinjam" class="form-control" placeholder="Masukkan Jumlah Barang" required>
+                                </div>
+                                <br>
+                                <br>
+                                <label for="alasan" class="col-sm-4 col-form-label text-md-right">
+                                    Lokasi
+                                </label>
+                                <div class="col-md-6">
+                                    <input id="alasan" type="text" name="alasan" class="form-control" placeholder="Masukkan Lokasi Barang" required>
+                                </div>
+                                <br>
+                                <br>
+                                <label for="tanggal" class="col-sm-4 col-form-label text-md-right">
+                                    Tanggal
+                                </label>
+                                <div class="col-md-6">
+                                    <input id="tanggal" type="text" name="tanggal" class="form-control" required>
                                 </div>
                                 <br>
                                 <br>

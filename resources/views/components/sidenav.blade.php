@@ -6,8 +6,12 @@
                     LIST
                 </div>
                 
-                <button class="navbar navbar-expand-lg navbar-dark bg-dark" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="color: white;">
+                <button class="nav-link" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="background-color:#212529; color: rgba(255, 255, 255, 0.5); border: none; box-shadow: none;">
+                    <div style="margin-right: 1rem">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
                     Storage Opname
+                    <i class="fas fa-caret-down" style="margin-left: auto;"></i>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNav">
@@ -26,9 +30,7 @@
                     </ul>
                 </div>
 
-                
-
-                <a class="nav-link" href="/">
+                <a class="nav-link" href="/pinjam">
                     <div class="sb-nav-link-icon">
                         <i class="fas fa-people-arrows">
                         </i>
