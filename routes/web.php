@@ -3,6 +3,7 @@
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\MasukController;
 use App\Http\Controllers\KeluarController;
+use App\Http\Controllers\RequestController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,9 +29,11 @@ Route::get('/keluar/edit/{id}', [KeluarController::class, 'keluaredit']);
 Route::get('/keluar/hapus/{id}', [KeluarController::class, 'keluarhapus']);
 
 // Route to Request
-Route::get('/request', function() {
-    return view('page/request');
-});
+Route::get('/request', [BarangController::class, 'barangrequest']);
+Route::get('/request/tampil', [RequestController::class, 'requesttampil'])->name('request');
+Route::post('/request/tambah', [RequestController::class, 'requesttambah']);
+Route::get('/request/edit/{id}', [RequestController::class, 'requestedit']);
+Route::get('/request/hapus/{id}', [RequestController::class, 'requesthapus']);
 
 // Route to Pinjam
 Route::get('/pinjam', function() {

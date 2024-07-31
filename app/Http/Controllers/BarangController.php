@@ -25,4 +25,10 @@ class BarangController extends Controller
 
         return view('page/keluar', ['barang' => $databarang]);
     }
+
+    public function barangrequest(){
+        $databarang = BarangModel::orderBy('id_barang', 'asc')->paginate(10);
+
+        return view('page/request', ['barang' => $databarang]);
+    }
 }

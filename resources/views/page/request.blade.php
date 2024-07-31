@@ -5,12 +5,12 @@
         <main>
             <div class="container-fluid">
                 <h1 class="mt-4">
-                    Portal List Barang Masuk
+                    Portal List Request Barang
                 </h1>
 
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active">
-                        Barang Masuk Warehouse
+                        Request Barang
                     </li>
                 </ol>
                 
@@ -63,12 +63,12 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalDataTambahLabel">
-                            Tambah Data Barang Masuk
+                            Tambah Data Request Barang
                         </h5>
                     </div>
 
                     <div class="modal-body">
-                        <form name="formdatatambah" id="formdatatambah" action="/masuk/tambah" method="post" enctype="multipart/form-data">
+                        <form name="formdatatambah" id="formdatatambah" action="/request/tambah" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
                                 <label for="nama_barang" class="col-sm-4 col-form-label text-md-right">
@@ -80,7 +80,7 @@
                                 <br>
                                 <br>
                                 <label for="quantity_stock" class="col-sm-4 col-form-label text-md-right">
-                                    Stock
+                                    Quantity
                                 </label>
                                 <div class="col-md-6">
                                     <input id="quantity_stock" type="text" name="quantity_stock" class="form-control" placeholder="Masukkan Jumlah Barang" required>
