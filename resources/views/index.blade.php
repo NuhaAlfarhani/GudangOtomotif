@@ -31,6 +31,7 @@
                                         <th style="text-align: center">Nomor</th>
                                         <th style="text-align: center">Nama Barang</th>
                                         <th style="text-align: center">Deskripsi Lokasi</th>
+                                        <th style="text-align: center">Jenis Kendaraan</th>
                                         <th style="text-align: center">Quantity Stock</th>
                                         <th style="text-align: center">Tanggal</th>
                                         <th style="text-align: center">Aksi</th>  
@@ -43,6 +44,7 @@
                                             <td style="text-align: center">{{ $brg->id }}</td>
                                             <td style="text-align: center">{{ $brg->nama_barang }}</td>
                                             <td style="text-align: center">{{ $brg->deskripsi_lokasi }}</td>
+                                            <td style="text-align: center">{{ $brg->kendaraan }}</td>
                                             <td style="text-align: center">{{ $brg->quantity_stock }}</td>
                                             <td style="text-align: center">{{ $brg->tanggal }}</td>
                                             <td style="text-align: center">

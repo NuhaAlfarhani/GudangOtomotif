@@ -32,8 +32,7 @@
                                     <tr>
                                         <td style="text-align: center">PKB</td>
                                         <td style="text-align: center">Tanggal</td>
-                                        <td style="text-align: center">Daftar Barang</td>
-                                        <td style="text-align: center">Jumlah Pinjam</td>
+                                        <td style="text-align: center">Daftar Barang (Jumlah)</td>
                                         <td style="text-align: center">Alasan</td>
                                         <td style="text-align: center">Aksi</td>
                                     </tr>
@@ -45,7 +44,6 @@
                                             <td style="text-align: center">{{ $brg->id }}</td>
                                             <td style="text-align: center">{{ $brg->tanggal }}</td>
                                             <td style="text-align: center">{{ $brg->daftar_barang }}</td>
-                                            <td style="text-align: center">{{ $brg->jumlah_pinjam }}</td>
                                             <td style="text-align: center">{{ $brg->alasan }}</td>
                                             <td style="text-align: center">
                                                 <a href="/masuk/edit/{{ $brg->id }}" class="btn btn-warning">Edit</a>

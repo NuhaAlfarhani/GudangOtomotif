@@ -34,6 +34,7 @@
                                         <td style="text-align: center">Nama Barang</td>
                                         <td style="text-align: center">Quantity Stock</td>
                                         <td style="text-align: center">Deskripsi Lokasi</td>
+                                        <td style="text-align: center">Jenis Kendaraan</td>
                                         <td style="text-align: center">Tanggal</td>
                                         <td style="text-align: center">Aksi</td>
                                     </tr>
@@ -46,6 +47,7 @@
                                             <td style="text-align: center">{{ $brg->nama_barang }}</td>
                                             <td style="text-align: center">{{ $brg->quantity_stock }}</td>
                                             <td style="text-align: center">{{ $brg->deskripsi_lokasi }}</td>
+                                            <td style="text-align: center">{{ $brg->kendaraan }}</td>
                                             <td style="text-align: center">{{ $brg->tanggal }}</td>
                                             <td style="text-align: center">
                                                 <a href="/masuk/edit/{{ $brg->id }}" class="btn btn-warning">Edit</a>

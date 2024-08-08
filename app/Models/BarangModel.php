@@ -16,6 +16,7 @@ class BarangModel extends Model
         'nama',
         'harga',
         'stok',
-        'deskripsi'
+        'deskripsi',
+        'kendaraan'
     ];
 }
