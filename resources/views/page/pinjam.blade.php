@@ -39,15 +39,15 @@
                                 </thead>
 
                                 <tbody>
-                                    @foreach ($barang as $brg)
+                                    @foreach ($pinjam as $pjm)
                                         <tr>
-                                            <td style="text-align: center">{{ $brg->id }}</td>
-                                            <td style="text-align: center">{{ $brg->tanggal }}</td>
-                                            <td style="text-align: center">{{ $brg->daftar_barang }}</td>
-                                            <td style="text-align: center">{{ $brg->alasan }}</td>
+                                            <td style="text-align: center">{{ $pjm->id }}</td>
+                                            <td style="text-align: center">{{ $pjm->tanggal }}</td>
+                                            <td style="text-align: center">{{ $pjm->daftar_barang }}</td>
+                                            <td style="text-align: center">{{ $pjm->alasan }}</td>
                                             <td style="text-align: center">
-                                                <a href="/masuk/edit/{{ $brg->id }}" class="btn btn-warning">Edit</a>
-                                                <a href="/masuk/hapus/{{ $brg->id }}" class="btn btn-danger">Hapus</a>
+                                                <a href="/masuk/edit/{{ $pjm->id }}" class="btn btn-warning">Edit</a>
+                                                <a href="/masuk/hapus/{{ $pjm->id }}" class="btn btn-danger">Hapus</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -59,7 +59,7 @@
             </div>
         </main>
 
-        {{ $barang->links()}}
+        {{ $pinjam->links()}}
         <div class="modal fade" id="modalDataTambah" tabindex="-1" role="dialog" aria-labelledby="modalDataTambahLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">

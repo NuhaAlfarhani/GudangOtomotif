@@ -11,7 +11,7 @@ class PinjamController extends Controller
     public function pinjamtampil(){
         $datapinjam = PinjamModel::orderBy('id_pinjam', 'asc')->paginate(10);
 
-        return view('pinjam', ['datapinjam' => $datapinjam]);
+        return view('page/pinjam', ['pinjam' => $datapinjam]);
     }
     
     public function pinjamtambah(Request $request){
