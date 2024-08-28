@@ -41,17 +41,17 @@
                                 </thead>
 
                                 <tbody>
-                                    @foreach ($masuk as $msk)
+                                    @foreach ($masuk as $transaksi)
                                         <tr>
-                                            <td style="text-align: center">{{ $msk->id_masuk }}</td>
-                                            <td style="text-align: center">{{ $msk->nama }}</td>
-                                            <td style="text-align: center">{{ $msk->stok }}</td>
-                                            <td style="text-align: center">{{ $msk->deskripsi }}</td>
-                                            <td style="text-align: center">{{ $msk->kendaraan }}</td>
-                                            <td style="text-align: center">{{ $msk->tanggal }}</td>
+                                            <td style="text-align: center">{{ $transaksi->id_masuk }}</td>
+                                            <td style="text-align: center">{{ $transaksi->barang->nama }}</td>
+                                            <td style="text-align: center">{{ $transaksi->stok }}</td>
+                                            <td style="text-align: center">{{ $transaksi->barang->deskripsi }}</td>
+                                            <td style="text-align: center">{{ $transaksi->barang->kendaraan }}</td>
+                                            <td style="text-align: center">{{ $transaksi->tanggal }}</td>
                                             <td style="text-align: center">
-                                                <a href="/masuk/edit/{{ $msk->id }}" class="btn btn-warning">Edit</a>
-                                                <a href="/masuk/hapus/{{ $msk->id }}" class="btn btn-danger">Hapus</a>
+                                                <a href="/masuk/edit/{{ $transaksi->id }}" class="btn btn-warning">Edit</a>
+                                                <a href="/masuk/hapus/{{ $transaksi->id }}" class="btn btn-danger">Hapus</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -89,7 +89,7 @@
                                     Stock
                                 </label>
                                 <div class="col-md-6">
-                                    <input id="quantity_stock" type="text" name="quantity_stock" class="form-control" placeholder="Masukkan Jumlah Barang" required>
+                                    <input id="quantity_stock" type="number" name="quantity_stock" class="form-control" placeholder="Masukkan Jumlah Barang" required>
                                 </div>
                                 <br>
                                 <br>
@@ -105,7 +105,7 @@
                                     Tanggal
                                 </label>
                                 <div class="col-md-6">
-                                    <input id="tanggal" type="text" name="tanggal" class="form-control" required>
+                                    <input id="tanggal" type="date" name="tanggal" class="form-control" required>
                                 </div>
                                 <br>
                                 <br>

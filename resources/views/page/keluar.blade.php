@@ -41,17 +41,17 @@
                                 </thead>
 
                                 <tbody>
-                                    @foreach ($barang as $brg)
+                                    @foreach ($keluar as $transaksi)
                                         <tr>
-                                            <td style="text-align: center">{{ $brg->id }}</td>
-                                            <td style="text-align: center">{{ $brg->nama_barang }}</td>
-                                            <td style="text-align: center">{{ $brg->deskripsi_lokasi }}</td>
-                                            <td style="text-align: center">{{ $brg->kendaraan }}</td>
-                                            <td style="text-align: center">{{ $brg->quantity_stock }}</td>
-                                            <td style="text-align: center">{{ $brg->tanggal }}</td>
+                                            <td style="text-align: center">{{ $transaksi->id }}</td>
+                                            <td style="text-align: center">{{ $transaksi->nama_barang }}</td>
+                                            <td style="text-align: center">{{ $transaksi->deskripsi_lokasi }}</td>
+                                            <td style="text-align: center">{{ $transaksi->kendaraan }}</td>
+                                            <td style="text-align: center">{{ $transaksi->quantity_stock }}</td>
+                                            <td style="text-align: center">{{ $transaksi->tanggal }}</td>
                                             <td style="text-align: center">
-                                                <a href="/masuk/edit/{{ $brg->id }}" class="btn btn-warning">Edit</a>
-                                                <a href="/masuk/hapus/{{ $brg->id }}" class="btn btn-danger">Hapus</a>
+                                                <a href="/masuk/edit/{{ $transaksi->id }}" class="btn btn-warning">Edit</a>
+                                                <a href="/masuk/hapus/{{ $transaksi->id }}" class="btn btn-danger">Hapus</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -63,7 +63,7 @@
             </div>
         </main>
 
-        {{ $barang->links()}}
+        {{ $keluar->links()}}
         <div class="modal fade" id="modalDataTambah" tabindex="-1" role="dialog" aria-labelledby="modalDataTambahLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">

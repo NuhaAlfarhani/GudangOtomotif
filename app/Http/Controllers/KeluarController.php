@@ -13,8 +13,9 @@ class KeluarController extends Controller
     //menampilkan data keluar
     public function keluartampil(){
         $keluar = KeluarModel::orderBy('id_keluar', 'asc')->paginate(10);
+        $databarang = BarangModel::all();
 
-        return view('page/keluar', ['keluar' => $keluar]);
+        return view('page/keluar', ['keluar' => $keluar, 'barang' => $databarang]);
     }
 
     //menambah data keluar

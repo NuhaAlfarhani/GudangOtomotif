@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\MasukController;
 use App\Http\Controllers\KeluarController;
@@ -8,12 +9,17 @@ use App\Http\Controllers\RequestController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', [BarangController::class, 'index']);
+
 
 // Route to login
 Route::get('/login', function() {
     return view('login');
 });
+
+// Route to barang
+Route::get('/', [BarangController::class, 'index'])->name('index');
+Route::post('/tambah', [BarangController::class, 'barangtambah'])->name('tambah');
+
 
 // Route to barang masuk
 Route::get('/masuk', [BarangController::class, 'barangmasuk']);
@@ -30,7 +36,7 @@ Route::get('/keluar/edit/{id}', [KeluarController::class, 'keluaredit']);
 Route::get('/keluar/hapus/{id}', [KeluarController::class, 'keluarhapus']);
 
 // Route to Pinjam
-Route::get('/pinjam', [PinjamController::class, 'pinjamtampil']);
+Route::get('/pinjam/tampil', [PinjamController::class, 'pinjamtampil']);
 Route::post('/pinjam/tambah', [PinjamController::class, 'pinjamtambah']);
 
 // Route to Request

@@ -21,8 +21,6 @@ class RequestModel extends Model
 
     public function barang()
     {
-        return $this
-        ->belongsTo(BarangModel::class, 'id_barang', 'id')
-        ->belongsTo(BarangModel::class, 'nama', 'nama');
+        return $this->belongsTo(BarangModel::class, 'id_barang', 'id');
     }
 }

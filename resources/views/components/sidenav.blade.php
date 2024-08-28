@@ -21,16 +21,16 @@
                         </li>
 
                         <li class="nav-item active" style="margin-left: 1rem">
-                            <a class="nav-link" href="/masuk"><div class="sb-nav-link-icon"><i class="fas fa-people-arrows"></i></div>Barang Masuk</a> <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/masuk/tampil"><div class="sb-nav-link-icon"><i class="fas fa-people-arrows"></i></div>Barang Masuk</a> <span class="sr-only">(current)</span></a>
                         </li>
 
                         <li class="nav-item active" style="margin-left: 1rem">
-                            <a class="nav-link" href="/keluar"><div class="sb-nav-link-icon"><i class="fas fa-truck"></i></div>Barang Keluar</a> <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/keluar/tampil"><div class="sb-nav-link-icon"><i class="fas fa-truck"></i></div>Barang Keluar</a> <span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
                 </div>
 
-                <a class="nav-link" href="/pinjam">
+                <a class="nav-link" href="/pinjam/tampil">
                     <div class="sb-nav-link-icon">
                         <i class="fas fa-people-arrows">
                         </i>

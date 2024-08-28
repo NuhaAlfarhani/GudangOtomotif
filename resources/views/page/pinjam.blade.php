@@ -5,7 +5,7 @@
         <main>
             <div class="container-fluid">
                 <h1 class="mt-4">
-                    Portal List Barang Masuk
+                    Portal List Peminjaman Barang
                 </h1>
 
                 <ol class="breadcrumb mb-4">
@@ -39,15 +39,15 @@
                                 </thead>
 
                                 <tbody>
-                                    @foreach ($pinjam as $pjm)
+                                    @foreach ($pinjam as $transaksi)
                                         <tr>
-                                            <td style="text-align: center">{{ $pjm->id }}</td>
-                                            <td style="text-align: center">{{ $pjm->tanggal }}</td>
-                                            <td style="text-align: center">{{ $pjm->daftar_barang }}</td>
-                                            <td style="text-align: center">{{ $pjm->alasan }}</td>
+                                            <td style="text-align: center">{{ $transaksi->id }}</td>
+                                            <td style="text-align: center">{{ $transaksi->tanggal }}</td>
+                                            <td style="text-align: center">{{ $transaksi->daftar_barang }}</td>
+                                            <td style="text-align: center">{{ $transaksi->alasan }}</td>
                                             <td style="text-align: center">
-                                                <a href="/masuk/edit/{{ $pjm->id }}" class="btn btn-warning">Edit</a>
-                                                <a href="/masuk/hapus/{{ $pjm->id }}" class="btn btn-danger">Hapus</a>
+                                                <a href="/masuk/edit/{{ $transaksi->id }}" class="btn btn-warning">Edit</a>
+                                                <a href="/masuk/hapus/{{ $transaksi->id }}" class="btn btn-danger">Hapus</a>
                                             </td>
                                         </tr>
                                     @endforeach

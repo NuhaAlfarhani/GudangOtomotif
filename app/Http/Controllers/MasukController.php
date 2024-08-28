@@ -15,7 +15,7 @@ class MasukController extends Controller
         $datamasuk = MasukModel::orderBy('id_masuk', 'asc')->paginate(10);
         $databarang = BarangModel::all();
 
-        return view('masuk', ['masuk' => $datamasuk, 'databarang' => $databarang]);
+        return view('page/masuk', ['masuk' => $datamasuk, 'barang' => $databarang]);
     }
 
     //menambah data masuk
