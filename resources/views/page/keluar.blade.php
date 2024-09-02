@@ -27,31 +27,29 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th style="text-align: center">Nomor</th>
-                                        <th style="text-align: center">Nama Barang</th>
-                                        <th style="text-align: center">Deskripsi Lokasi</th>
-                                        <th style="text-align: center">Jenis Kendaraan</th>
-                                        <th style="text-align: center">Quantity Stock</th>
-                                        <th style="text-align: center">Tanggal</th>
-                                        <th style="text-align: center">Aksi</th>
+                                        <td style="text-align: center">Nomor</td>
+                                        <td style="text-align: center">Nama Barang</td>
+                                        <td style="text-align: center">Jumlah</td>
+                                        <td style="text-align: center">Jenis Kendaraan</td>
+                                        <td style="text-align: center">Tanggal</td>
+                                        <td style="text-align: center">Aksi</td>
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                     @foreach ($keluar as $transaksi)
                                         <tr>
-                                            <td style="text-align: center">{{ $transaksi->id }}</td>
-                                            <td style="text-align: center">{{ $transaksi->nama_barang }}</td>
-                                            <td style="text-align: center">{{ $transaksi->deskripsi_lokasi }}</td>
-                                            <td style="text-align: center">{{ $transaksi->kendaraan }}</td>
-                                            <td style="text-align: center">{{ $transaksi->quantity_stock }}</td>
+                                            <td style="text-align: center">{{ $transaksi->id_keluar }}</td>
+                                            <td style="text-align: center">{{ $transaksi->barang->nama }}</td>
+                                            <td style="text-align: center">{{ $transaksi->jumlah }}</td>
+                                            <td style="text-align: center">{{ $transaksi->barang->kendaraan }}</td>
                                             <td style="text-align: center">{{ $transaksi->tanggal }}</td>
                                             <td style="text-align: center">
-                                                <a href="/masuk/edit/{{ $transaksi->id }}" class="btn btn-warning">Edit</a>
-                                                <a href="/masuk/hapus/{{ $transaksi->id }}" class="btn btn-danger">Hapus</a>
+                                                <a href="/keluar/edit/{{ $transaksi->id }}" class="btn btn-warning">Edit</a>
+                                                <a href="/keluar/hapus/{{ $transaksi->id }}" class="btn btn-danger">Hapus</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -74,30 +72,27 @@
                     </div>
 
                     <div class="modal-body">
-                        <form name="datatambah" id="formdatatambah" action="/keluar/tambah" method="post" enctype="multipart/form-data">
+                        <form name="datatambah" id="formdatatambah" action="{{ route('keluartambah') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
-                                <label for="nama_barang" class="col-sm-4 col-form-label text-md-right">
+                                <label for="id_barang" class="col-sm-4 col-form-label text-md-right">
                                     Nama Barang
                                 </label>
                                 <div class="col-md-6">
-                                    <input id="nama_barang" type="text" name="nama_barang" class="form-control" placeholder="Masukkan Nama Barang" required>
+                                    <select id="id_barang" name="id_barang" class="form-control" placeholder="Pilih Barang" required>
+                                        <option value="">Pilih Barang</option>
+                                        @foreach ($barang as $barang)
+                                            <option value="{{ $barang->id }}">{{ $barang->nama }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <br>
                                 <br>
-                                <label for="quantity_stock" class="col-sm-4 col-form-label text-md-right">
-                                    Stock
+                                <label for="jumlah" class="col-sm-4 col-form-label text-md-right">
+                                    Jumlah
                                 </label>
                                 <div class="col-md-6">
-                                    <input id="quantity_stock" type="text" name="quantity_stock" class="form-control" placeholder="Masukkan Jumlah Barang" required>
-                                </div>
-                                <br>
-                                <br>
-                                <label for="deskripsi_lokasi" class="col-sm-4 col-form-label text-md-right">
-                                    Lokasi
-                                </label>
-                                <div class="col-md-6">
-                                    <input id="deskripsi_lokasi" type="text" name="deskripsi_lokasi" class="form-control" placeholder="Masukkan Lokasi Barang" required>
+                                    <input id="jumlah" type="text" name="jumlah" class="form-control" placeholder="Masukkan Jumlah Barang" required>
                                 </div>
                                 <br>
                                 <br>
@@ -105,17 +100,12 @@
                                     Tanggal
                                 </label>
                                 <div class="col-md-6">
-                                    <input type="date" name="tanggal" id="tanggal" class="form-control">
-                                    <script type="text/javascript">
-                                        $(function() {
-                                            $('#datepicker').datepicker();
-                                        });
-                                    </script>
+                                    <input type="date" name="tanggal" id="tanggal" class="form-control" required>
                                 </div>
                                 <br>
                                 <br>
                                 <div>
-                                    <button type="submit" class="btn btn-success" name="datatambah">
+                                    <button type="submit" class="btn btn-success">
                                         Simpan Data
                                     </button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" name="tutup">

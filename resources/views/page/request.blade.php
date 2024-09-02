@@ -32,20 +32,20 @@
                                     <tr>
                                         <td style="text-align: center">Nomor</td>
                                         <td style="text-align: center">Nama Barang</td>
-                                        <td style="text-align: center">Quantity</td>
+                                        <td style="text-align: center">Jumlah</td>
                                         <td style="text-align: center">Aksi</td>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    @foreach ($barang as $brg)
+                                    @foreach ($req as $request)
                                         <tr>
-                                            <td style="text-align: center">{{ $brg->id }}</td>
-                                            <td style="text-align: center">{{ $brg->nama_barang }}</td>
-                                            <td style="text-align: center">{{ $brg->quantity_stock }}</td>
+                                            <td style="text-align: center">{{ $request->id_request }}</td>
+                                            <td style="text-align: center">{{ $request->barang->nama }}</td>
+                                            <td style="text-align: center">{{ $request->jumlah }}</td>
                                             <td style="text-align: center">
-                                                <a href="/masuk/edit/{{ $brg->id }}" class="btn btn-warning">Edit</a>
-                                                <a href="/masuk/hapus/{{ $brg->id }}" class="btn btn-danger">Hapus</a>
+                                                <a href="/masuk/edit/{{ $request->id }}" class="btn btn-warning">Edit</a>
+                                                <a href="/masuk/hapus/{{ $request->id }}" class="btn btn-danger">Hapus</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -57,7 +57,7 @@
             </div>
         </main>
 
-        {{ $barang->links()}}
+        {{ $req->links()}}
         <div class="modal fade" id="modalDataTambah" tabindex="-1" role="dialog" aria-labelledby="modalDataTambahLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -68,22 +68,26 @@
                     </div>
 
                     <div class="modal-body">
-                        <form name="formdatatambah" id="formdatatambah" action="/request/tambah" method="post" enctype="multipart/form-data">
+                        <form name="formdatatambah" id="formdatatambah" action="{{ route('requesttambah') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
-                                <label for="nama_barang" class="col-sm-4 col-form-label text-md-right">
+                                <label for="id_barang" class="col-sm-4 col-form-label text-md-right">
                                     Nama Barang
                                 </label>
                                 <div class="col-md-6">
-                                    <input id="nama_barang" type="text" name="nama_barang" class="form-control" placeholder="Masukkan Nama Barang" required>
+                                    <select id="id_barang" name="id_barang" class="form-control" placeholder="Pilih Barang" required>
+                                        <option value="">Pilih Barang</option>
+                                        @foreach ($barang as $barang)
+                                            <option value="{{ $barang->id }}">{{ $barang->nama }}</option>
+                                        @endforeach
                                 </div>
                                 <br>
                                 <br>
-                                <label for="quantity_stock" class="col-sm-4 col-form-label text-md-right">
-                                    Quantity
+                                <label for="jumlah" class="col-sm-4 col-form-label text-md-right">
+                                    Jumlah
                                 </label>
                                 <div class="col-md-6">
-                                    <input id="quantity_stock" type="text" name="quantity_stock" class="form-control" placeholder="Masukkan Jumlah Barang" required>
+                                    <input id="jumlah" type="text" name="jumlah" class="form-control" placeholder="Masukkan Jumlah Barang" required>
                                 </div>
                                 <br>
                                 <br>

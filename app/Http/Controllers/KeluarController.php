@@ -12,7 +12,7 @@ class KeluarController extends Controller
 {
     //menampilkan data keluar
     public function keluartampil(){
-        $keluar = KeluarModel::orderBy('id_keluar', 'asc')->paginate(10);
+        $keluar = KeluarModel::paginate(10);
         $databarang = BarangModel::all();
 
         return view('page/keluar', ['keluar' => $keluar, 'barang' => $databarang]);
@@ -20,20 +20,21 @@ class KeluarController extends Controller
 
     //menambah data keluar
     public function keluartambah(Request $request){
-        $this->validate($request, [
-            'id' => 'required',
+        dd($request->all());
+        $request->validate( [
+            'id_barang' => 'required',
             'jumlah' => 'required',
             'tanggal' => 'required'
         ]);
 
         KeluarModel::create([
-            'id' => $request->id,
+            'id_barang' => $request->id_barang,
             'jumlah' => $request->jumlah,
             'tanggal' => $request->tanggal
         ]);
 
-        BarangModel::where('id', $request->id)->decrement('stok', $request->jumlah);
+        BarangModel::where('id', $request->id_barang)->decrement('stok', $request->jumlah);
 
-        return redirect('/keluar');
+        return redirect()->route('keluartampil')->with('success', 'Data berhasil ditambahkan');
     }
 }

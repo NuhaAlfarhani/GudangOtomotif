@@ -1,6 +1,11 @@
 
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="/index">HINO</a>
+    <a class="navbar-brand" href="/">
+        HINO
+
+        <img src="{{ asset('assets')}}/images/ZETA_logo.png" style="width: 50px; height: 50px;">
+    </a>
+    
     
     
     <ul class="navbar-nav ml-auto ml-md-0">

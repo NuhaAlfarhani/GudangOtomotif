@@ -8,8 +8,8 @@ use App\Models\BarangModel;
 
 class BarangController extends Controller
 {
-    public function index(){
-        $databarang = BarangModel::orderBy('id', 'asc')->paginate(10);
+    public function barangtampil(){
+        $databarang = BarangModel::paginate(10);
 
         return view('index', ['barang' => $databarang]);
     }
@@ -17,22 +17,31 @@ class BarangController extends Controller
     public function barangtambah(Request $request){
         $request->validate( [
             'nama' => 'required',
-            'harga' => 'required',
-            'stok' => 'required',
+            'stok' => 'nullable|integer',
             'deskripsi' => 'required',
             'kendaraan' => 'required',
         ]);
+        
+        $stok = $request->stok ?? 0;
         // dd($request->all());
         
         BarangModel::create([
             'nama' => $request->nama,
-            'harga' => $request->harga,
-            'stok' => $request->stok,
+            'stok' => $stok,
             'deskripsi' => $request->deskripsi,
             'kendaraan' => $request->kendaraan,
         ]);
 
-        return redirect()->route('index')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->route('barangtampil')->with('success', 'Data berhasil ditambahkan');
+    }
+    
+    public function barangcari(Request $request){
+        $cari = $request->get('cari');
+        $databarang = BarangModel::where('nama', 'like', "%{$cari}%")
+        ->orWhere('id', 'like', "%{$cari}%")
+        ->get(['id', 'nama', 'stok', 'deskripsi', 'kendaraan']);
+
+        return response()->json($databarang);
     }
     
     public function barangmasuk(){

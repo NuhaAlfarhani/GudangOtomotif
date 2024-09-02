@@ -12,7 +12,7 @@ class MasukController extends Controller
 {
     //menampilkan data masuk
     public function masuktampil(){
-        $datamasuk = MasukModel::orderBy('id_masuk', 'asc')->paginate(10);
+        $datamasuk = MasukModel::paginate(10);
         $databarang = BarangModel::all();
 
         return view('page/masuk', ['masuk' => $datamasuk, 'barang' => $databarang]);
@@ -20,20 +20,21 @@ class MasukController extends Controller
 
     //menambah data masuk
     public function masuktambah(Request $request){
-        $this->validate($request, [
-            'id' => 'required',
+        // dd($request->all());
+        $request->validate( [
+            'id_barang' => 'required',
             'jumlah' => 'required',
             'tanggal' => 'required'
         ]);
-
+        
         MasukModel::create([
-            'id' => $request->id,
+            'id_barang' => $request->id_barang,
             'jumlah' => $request->jumlah,
             'tanggal' => $request->tanggal
         ]);
 
-        BarangModel::where('id', $request->id)->increment('stok', $request->jumlah);
+        BarangModel::where('id', $request->id_barang)->increment('stok', $request->jumlah);
         
-        return redirect('/masuk');
+        return redirect()->route('masuktampil')->with('success', 'Data berhasil ditambahkan');
     }
 }

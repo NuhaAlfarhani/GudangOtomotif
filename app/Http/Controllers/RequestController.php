@@ -12,26 +12,24 @@ class RequestController extends Controller
 {
     // menampilkan data request
     public function requesttampil(){
-        $datarequest = RequestModel::orderBy('id_request', 'asc')->paginate(10);
+        $datarequest = RequestModel::paginate(10);
         $databarang = BarangModel::all();
 
-        return view('request', ['datarequest' => $datarequest, 'databarang' => $databarang]);
+        return view('page/request', ['req' => $datarequest, 'barang' => $databarang]);
     }
 
     // menambah data request
     public function requesttambah(Request $request){
         $this->validate($request, [
-            'id' => 'required',
+            'id_barang' => 'required',
             'jumlah' => 'required'
         ]);
 
         RequestModel::create([
-            'id' => $request->id,
+            'id_barang' => $request->id_barang,
             'jumlah' => $request->jumlah
         ]);
-
-        BarangModel::where('id', $request->id)->decrement('stok', $request->jumlah);
         
-        return redirect('/request');
+        return redirect()->route('requesttampil')->with('success', 'Data berhasil ditambahkan');
     }
 }

@@ -15,7 +15,6 @@ class KeluarModel extends Model
 
     protected $fillable = [
         'id_barang',
-        'nama',
         'jumlah',
         'tanggal'
     ];
