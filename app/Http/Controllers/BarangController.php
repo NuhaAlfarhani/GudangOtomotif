@@ -8,23 +8,25 @@ use App\Models\BarangModel;
 
 class BarangController extends Controller
 {
-    public function barangtampil(){
+    public function barangtampil()
+    {
         $databarang = BarangModel::paginate(10);
 
         return view('index', ['barang' => $databarang]);
     }
 
-    public function barangtambah(Request $request){
-        $request->validate( [
+    public function barangtambah(Request $request)
+    {
+        $request->validate([
             'nama' => 'required',
             'stok' => 'nullable|integer',
             'deskripsi' => 'required',
             'kendaraan' => 'required',
         ]);
-        
+
         $stok = $request->stok ?? 0;
         // dd($request->all());
-        
+
         BarangModel::create([
             'nama' => $request->nama,
             'stok' => $stok,
@@ -34,29 +36,33 @@ class BarangController extends Controller
 
         return redirect()->route('barangtampil')->with('success', 'Data berhasil ditambahkan');
     }
-    
-    public function barangcari(Request $request){
+
+    public function barangcari(Request $request)
+    {
         $cari = $request->get('cari');
         $databarang = BarangModel::where('nama', 'like', "%{$cari}%")
-        ->orWhere('id', 'like', "%{$cari}%")
-        ->get(['id', 'nama', 'stok', 'deskripsi', 'kendaraan']);
+            ->orWhere('id', 'like', "%{$cari}%")
+            ->get(['id', 'nama', 'stok', 'deskripsi', 'kendaraan']);
 
         return response()->json($databarang);
     }
-    
-    public function barangmasuk(){
+
+    public function barangmasuk()
+    {
         $databarang = BarangModel::orderBy('id', 'asc')->paginate(10);
 
         return view('page/masuk', ['barang' => $databarang]);
     }
 
-    public function barangkeluar(){
+    public function barangkeluar()
+    {
         $databarang = BarangModel::orderBy('id', 'asc')->paginate(10);
 
         return view('page/keluar', ['barang' => $databarang]);
     }
 
-    public function barangrequest(){
+    public function barangrequest()
+    {
         $databarang = BarangModel::orderBy('id', 'asc')->paginate(10);
 
         return view('page/request', ['barang' => $databarang]);
