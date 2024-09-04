@@ -1,7 +1,7 @@
 
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-light">
     <a class="navbar-brand" href="/">
-        HINO
+        ZETA
 
         <img src="{{ asset('assets')}}/images/ZETA_logo.png" style="width: 50px; height: 50px;">
     </a>
@@ -12,8 +12,8 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">Settings</a>
-                <a class="dropdown-item" href="#">Activity Log</a>
+                <a class="dropdown-item" href="#">Help</a>
+                <a class="dropdown-item" href="#">About</a>
                 <div class="dropdown-divider"></div>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
