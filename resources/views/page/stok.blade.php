@@ -9,40 +9,30 @@
                         Stock Barang Warehouse
                     </h2>
 
-                    <div class="search mb-4">
-                        <form action="{{ route('cari') }}" method="GET" class="form-inline" id="search-form">
-                            <div class="input-group">
-                                <input type="text" name="cari" class="form-control" placeholder="Cari Barang..." aria-label="Cari" aria-describedby="button-search" id="search-input">
-                            </div>
-                        </form>
-                    </div>
-
-                    <div id="autocomplete-results" class="list-group"></div>
-
-                    {{-- <div class="search">
-                        <form action="{{ route('cari') }}" method="GET" class="form-inline">
-                            <div class="input-group">
-                                <input type="text" name="cari" class="form-control" placeholder="Cari Barang..." aria-label="Cari" aria-describedby="button-search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit" id="button-search">Cari</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div> --}}
-
                     <div class="card-header">
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalDataTambah">
                             Tambah Barang
                         </button>
-    
+                        
                         <button type="button" class="btn btn-info">
                             Export Data
                         </button>
                     </div>
                 </div>
-                    
-                <div class="card mb-4">
-                    <div class="card-body">
+                
+                <div class="card-body">
+                    <div class="card mb-4">
+                        <div class="search">
+                            <form action="{{ route('cari') }}" method="GET" class="form-inline">
+                                <div class="input-group">
+                                    <input type="text" name="cari" class="form-control" placeholder="Cari Barang..." aria-label="Cari" aria-describedby="button-search">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit" id="button-search">Cari</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
