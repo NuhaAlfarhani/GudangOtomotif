@@ -12,7 +12,7 @@ class BarangController extends Controller
     {
         $databarang = BarangModel::paginate(10);
 
-        return view('index', ['barang' => $databarang]);
+        return view('/page/stok', ['barang' => $databarang]);
     }
 
     public function barangtambah(Request $request)
@@ -39,13 +39,15 @@ class BarangController extends Controller
 
     public function barangcari(Request $request)
     {
-        $cari = $request->get('cari');
-        $databarang = BarangModel::where('nama', 'like', "%{$cari}%")
-            ->orWhere('id', 'like', "%{$cari}%")
-            ->get(['id', 'nama', 'stok', 'deskripsi', 'kendaraan']);
+        $cari = $request->input('cari');
+        $barang = BarangModel::where('nama', 'LIKE', "%{$cari}%")
+        ->orWhere('deskripsi', 'LIKE', "%{$cari}%")
+        ->orWhere('kendaraan', 'LIKE', "%{$cari}%")
+        ->paginate(10);
 
-        return response()->json($databarang);
+        return view('/page/stok', compact('barang'));
     }
+
 
     public function barangmasuk()
     {

@@ -10,6 +10,12 @@
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
+.search{
+  margin: auto;
+  margin-right: 0;
+}
+
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -70,9 +76,9 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #cddc39;
+  color: white;
   text-align: left;
-  background-color: #4b8ac4;
+  background-color: #34374C;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -165,7 +171,7 @@ sup {
 }
 
 a {
-  color: #007bff;
+  color: white;
   text-decoration: none;
   background-color: transparent;
 }
@@ -1982,6 +1988,11 @@ pre code {
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.form-button{
+  margin: auto;
+  margin-top: 1rem;
+  margin-right: 1rem;
 }
 @media (prefers-reduced-motion: reduce) {
   .form-control {
@@ -3892,6 +3903,10 @@ input[type=button].btn-block {
   display: block;
   padding: 0.5rem 1rem;
 }
+#nav-menu{
+  background-color: #2C2E3E;
+  border: none;
+}
 .nav-link:hover, .nav-link:focus {
   text-decoration: none;
 }
@@ -4289,13 +4304,13 @@ input[type=button].btn-block {
 }
 
 .navbar-dark .navbar-brand {
-  color: #fff;
+  color: white;
 }
 .navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {
-  color: #fff;
+  color: white;
 }
 .navbar-dark .navbar-nav .nav-link {
-  color: rgba(255, 255, 255, 0.5);
+  color: white;
 }
 .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
   color: rgba(255, 255, 255, 0.75);
@@ -4328,14 +4343,12 @@ input[type=button].btn-block {
 
 .card {
   position: relative;
+  margin-top: 2rem;
+  vertical-align: middle;
   display: flex;
   flex-direction: column;
-  min-width: 0;
   word-wrap: break-word;
-  background-color: #ac343499;
-  background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
+  background-color: #2C2E3E;
 }
 .card > hr {
   margin-right: 0;
@@ -4387,10 +4400,8 @@ input[type=button].btn-block {
 }
 
 .card-header {
-  padding: 0.75rem 1.25rem;
-  margin-bottom: 0;
-  background-color: rgba(0, 0, 0, 0.03);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  margin:auto;
+  margin-right: 1rem;
 }
 .card-header:first-child {
   border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
@@ -4547,10 +4558,10 @@ input[type=button].btn-block {
 .breadcrumb {
   display: flex;
   flex-wrap: wrap;
-  padding: 0.75rem 1rem;
+  padding: 1rem 1rem;
   margin-bottom: 1rem;
   list-style: none;
-  background-color: #e9ecef;
+  background-color: #2C2E3E;
   border-radius: 0.25rem;
 }
 
@@ -5464,7 +5475,7 @@ a.close.disabled {
   flex-direction: column;
   width: 100%;
   pointer-events: auto;
-  background-color: #fff;
+  background-color: #2C2E3E;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.3rem;
@@ -5495,6 +5506,7 @@ a.close.disabled {
   border-bottom: 1px solid #dee2e6;
   border-top-left-radius: calc(0.3rem - 1px);
   border-top-right-radius: calc(0.3rem - 1px);
+  background-color: #EE2B47;
 }
 .modal-header .close {
   padding: 1rem 1rem;
@@ -6146,7 +6158,7 @@ button.bg-danger:focus {
 }
 
 .bg-light {
-  background-color: #f8f9fa !important;
+  background-color: #EE2B47 !important;
 }
 
 a.bg-light:hover, a.bg-light:focus,
@@ -10197,14 +10209,14 @@ body {
 }
 
 .sb-sidenav-dark {
-  background-color: #212529;
+  background-color: #2C2E3E;
   color: rgba(255, 255, 255, 0.5);
 }
 .sb-sidenav-dark .sb-sidenav-menu .sb-sidenav-menu-heading {
-  color: rgba(255, 255, 255, 0.25);
+  color: white;
 }
 .sb-sidenav-dark .sb-sidenav-menu .nav-link {
-  color: rgba(255, 255, 255, 0.5);
+  color: white;
 }
 .sb-sidenav-dark .sb-sidenav-menu .nav-link .sb-nav-link-icon {
   color: rgba(255, 255, 255, 0.25);
@@ -10222,7 +10234,8 @@ body {
   color: #fff;
 }
 .sb-sidenav-dark .sb-sidenav-footer {
-  background-color: #343a40;
+  background-color: #EE2B47;
+  color: white;
 }
 
 .sb-sidenav-light {

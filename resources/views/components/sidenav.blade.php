@@ -3,12 +3,12 @@
         <div class="sb-sidenav-menu">
             <div class="nav">
                 <div class="sb-sidenav-menu-heading">
-                    LIST
+                    MENU
                 </div>
                 
-                <button class="nav-link" type="button" data-toggle="collapse" data-target="#storageopname" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="background-color:#212529; color: rgba(255, 255, 255, 0.5); border: none; box-shadow: none;">
-                    <div style="margin-right: 1rem">
-                        <i class="fas fa-archive"></i>
+                <button class="nav-link" id="nav-menu" type="button" data-toggle="collapse" data-target="#storageopname" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <div>
+                        <i class="fa-solid fa-archway"></i>
                     </div>
                     Storage Opname
                     <i class="fas fa-caret-down" style="margin-left: auto;"></i>
@@ -17,7 +17,7 @@
                 <div class="collapse navbar-collapse" id="storageopname">
                     <ul class="navbar-nav">
                         <li class="nav-item active" style="margin-left: 1rem">
-                            <a class="nav-link" href="/"><div class="sb-nav-link-icon"><i class="fas fa-archive"></i></div>Stock Barang</a> <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/stok"><div class="sb-nav-link-icon"><i class="fas fa-archive"></i></div>Stock Barang</a> <span class="sr-only">(current)</span></a>
                         </li>
 
                         <li class="nav-item active" style="margin-left: 1rem">
@@ -26,10 +26,7 @@
                     </ul>
                 </div>
                 
-                <button class="nav-link" type="button" data-toggle="collapse" data-target="#kegiatanbengkel" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="background-color:#212529; color: rgba(255, 255, 255, 0.5); border: none; box-shadow: none;">
-                    <div style="margin-right: 1rem">
-                        <i class="fas fa-people-carry"></i>
-                    </div>
+                <button class="nav-link" id="nav-menu" type="button" data-toggle="collapse" data-target="#kegiatanbengkel" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     Kegiatan Bengkel
                     <i class="fas fa-caret-down" style="margin-left: auto;"></i>
                 </button>
@@ -46,10 +43,7 @@
                     </ul>
                 </div>
 
-                <button class="nav-link" type="button" data-toggle="collapse" data-target="#storing" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="background-color:#212529; color: rgba(255, 255, 255, 0.5); border: none; box-shadow: none;">
-                    <div style="margin-right: 1rem">
-                        <i class="fa-solid fa-person-walking-arrow-loop-left"></i>
-                    </div>
+                <button class="nav-link" id="nav-menu" type="button" data-toggle="collapse" data-target="#storing" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     Storing
                     <i class="fas fa-caret-down" style="margin-left: auto;"></i>
                 </button>

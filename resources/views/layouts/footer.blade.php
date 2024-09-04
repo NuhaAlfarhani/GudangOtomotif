@@ -1,7 +1,7 @@
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid" style="position:relative">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted" style="margin-left:13rem">
+            <div style="margin-left:13rem">
                 Copyright &copy;
                 
                 <a href="https://id.linkedin.com/in/arya-ferdian-ramadhan-putra-bba54a2b2" target="_blank" rel="noopener noreferrer">

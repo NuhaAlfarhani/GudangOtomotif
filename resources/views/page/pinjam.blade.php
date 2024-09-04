@@ -4,17 +4,11 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <h1 class="mt-4">
-                    Portal List Peminjaman Barang
-                </h1>
+                <div class="breadcrumb mb-4">
+                    <h2>
+                        Peminjaman Barang Warehouse
+                    </h2>
 
-                <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">
-                        Barang Masuk Warehouse
-                    </li>
-                </ol>
-                
-                <div class="card mb-4">
                     <div class="card-header">
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalDataTambah">
                             Tambah Data
@@ -24,7 +18,9 @@
                             Export Data
                         </button>
                     </div>
-
+                </div>
+                
+                <div class="card mb-4">
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -105,7 +101,7 @@
                                 </div>
                                 <br>
                                 <br>
-                                <div>
+                                <div class="form-button">
                                     <button type="submit" class="btn btn-success" name="datatambah">
                                         Simpan Data
                                     </button>

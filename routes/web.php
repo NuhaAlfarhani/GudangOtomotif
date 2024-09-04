@@ -9,17 +9,20 @@ use App\Http\Controllers\RequestController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-
-
 // Route to login
 Route::get('/login', function() {
     return view('login');
 });
 
+// Route to home
+Route::get('/', function() {
+    return view('index');
+});
+
 // Route to barang
-Route::get('/', [BarangController::class, 'barangtampil'])->name('barangtampil');
-Route::post('/tambah', [BarangController::class, 'barangtambah'])->name('barangtambah');
-Route::get('/cari', [BarangController::class, 'barangcari'])->name('cari');
+Route::get('/stok', [BarangController::class, 'barangtampil'])->name('barangtampil');
+Route::post('/stok/tambah', [BarangController::class, 'barangtambah'])->name('barangtambah');
+Route::get('/stok/cari', [BarangController::class, 'barangcari'])->name('cari');
 
 
 // Route to barang masuk
