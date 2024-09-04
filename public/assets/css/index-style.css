@@ -1966,6 +1966,7 @@ pre code {
   }
 }
 .table-responsive {
+  padding: 1rem;
   display: block;
   width: 100%;
   overflow-x: auto;
@@ -4601,8 +4602,8 @@ input[type=button].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #007bff;
-  background-color: #fff;
+  color: white;
+  background-color: #34374C;
   border: 1px solid #dee2e6;
 }
 .page-link:hover {
@@ -4629,8 +4630,8 @@ input[type=button].btn-block {
 }
 .page-item.active .page-link {
   z-index: 3;
-  color: #fff;
-  background-color: #007bff;
+  color: white;
+  background-color: #34374C;
   border-color: #007bff;
 }
 .page-item.disabled .page-link {

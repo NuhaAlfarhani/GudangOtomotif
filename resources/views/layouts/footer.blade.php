@@ -1,4 +1,4 @@
-<footer class="py-4 bg-light mt-auto">
+<footer class="py-4 bg-light mt-auto" style="position: absolute; margin:auto; display:flex; right:0; left:0">
     <div class="container-fluid" style="position:relative">
         <div class="d-flex align-items-center justify-content-between small">
             <div style="margin-left:13rem">

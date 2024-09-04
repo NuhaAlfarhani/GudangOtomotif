@@ -62,13 +62,32 @@
                                     @endforeach
                                 </tbody>
                             </table>
+
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li class="page-item {{ $barang->onFirstPage() ? 'disabled' : '' }}">
+                                        <a class="page-link" href="{{ $barang->previousPageUrl() }}">Previous</a>
+                                    </li>
+                                    @for ($i = 1; $i <= $barang->lastPage(); $i++)
+                                        <li class="page-item {{ $i == $barang->currentPage() ? 'active' : '' }}">
+                                            <a class="page-link" href="{{ $barang->url($i) }}">{{ $i }}</a>
+                                        </li>
+                                    @endfor
+                                    <li class="page-item {{ $barang->hasMorePages() ? '' : 'disabled' }}">
+                                        <a class="page-link" href="{{ $barang->nextPageUrl() }}">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            
+                            Halaman : {{ $barang->currentPage() }} <br/>
+                            Jumlah Data : {{ $barang->total() }} <br/>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </main>
 
-        {{ $barang->links()}}
         <div class="modal fade" id="modalDataTambah" tabindex="-1" role="dialog" aria-labelledby="modalDataTambahLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
