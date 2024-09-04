@@ -66,30 +66,15 @@
                     </div>
 
                     <div class="modal-body">
-                        <form name="formdatatambah" id="formdatatambah" action="/masuk/tambah" method="post" enctype="multipart/form-data">
+                        <form name="formdatatambah" id="formdatatambah" action="{{ route('pinjamtambah') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
-                                <label for="daftar_barang" class="col-sm-4 col-form-label text-md-right">
-                                    Daftar Barang
+                                
+                                <label for="PKB" class="col-sm-4 col-form-label text-md-right">
+                                    PKB
                                 </label>
                                 <div class="col-md-6">
-                                    <input id="daftar_barang" type="text" name="daftar_barang" class="form-control" placeholder="Masukkan Daftar Barang" required>
-                                </div>
-                                <br>
-                                <br>
-                                <label for="jumlah_pinjam" class="col-sm-4 col-form-label text-md-right">
-                                    Stock
-                                </label>
-                                <div class="col-md-6">
-                                    <input id="jumlah_pinjam" type="text" name="jumlah_pinjam" class="form-control" placeholder="Masukkan Jumlah Barang" required>
-                                </div>
-                                <br>
-                                <br>
-                                <label for="alasan" class="col-sm-4 col-form-label text-md-right">
-                                    Lokasi
-                                </label>
-                                <div class="col-md-6">
-                                    <input id="alasan" type="text" name="alasan" class="form-control" placeholder="Masukkan Lokasi Barang" required>
+                                    <input id="PKB" type="text" name="PKB" class="form-control" placeholder="Masukkan PKB" required>
                                 </div>
                                 <br>
                                 <br>
@@ -97,12 +82,28 @@
                                     Tanggal
                                 </label>
                                 <div class="col-md-6">
-                                    <input id="tanggal" type="text" name="tanggal" class="form-control" required>
+                                    <input id="tanggal" type="date" name="tanggal" class="form-control" required>
+                                </div>
+                                <br>
+                                <br>
+                                <label for="daftar_barang" class="col-sm-4 col-form-label text-md-right">
+                                    Daftar Barang (Jumlah)
+                                </label>
+                                <div class="col-md-6">
+                                    <textarea style="margin-bottom: 0.65rem" id="daftar_barang" type="textarea" name="daftar_barang" class="form-control" placeholder="Masukkan Daftar Barang" required></textarea>
+                                </div>
+                                <br>
+                                <br>
+                                <label for="alasan" class="col-sm-4 col-form-label text-md-right">
+                                    Alasan
+                                </label>
+                                <div class="col-md-6">
+                                    <input id="alasan" type="text" name="alasan" class="form-control" placeholder="Masukkan Alasan" required>
                                 </div>
                                 <br>
                                 <br>
                                 <div class="form-button">
-                                    <button type="submit" class="btn btn-success" name="datatambah">
+                                    <button type="submit" class="btn btn-success">
                                         Simpan Data
                                     </button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" name="tutup">

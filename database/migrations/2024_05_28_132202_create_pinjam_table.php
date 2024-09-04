@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pinjam', function (Blueprint $table) {
             $table->id('PKB');
+            $table->date('tanggal');
             $table->string('daftar_barang');
             $table->string('alasan');
             $table->timestamps();

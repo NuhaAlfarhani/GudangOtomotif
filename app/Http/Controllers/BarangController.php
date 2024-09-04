@@ -48,6 +48,13 @@ class BarangController extends Controller
         return view('/page/stok', compact('barang'));
     }
 
+    // public function barangedit($id)
+    // {
+    //     $barang = BarangModel::find($id);
+
+    //     return view('/page/edit', ['barang' => $barang]);
+    // }
+
 
     public function barangmasuk()
     {

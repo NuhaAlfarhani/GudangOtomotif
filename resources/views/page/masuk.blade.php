@@ -56,8 +56,7 @@
                 </div>
             </div>
         </main>
-
-        {{ $masuk->links()}}
+        
         <div class="modal fade" id="modalDataTambah" tabindex="-1" role="dialog" aria-labelledby="modalDataTambahLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">

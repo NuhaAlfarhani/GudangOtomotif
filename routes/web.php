@@ -40,8 +40,9 @@ Route::get('/keluar/edit/{id}', [KeluarController::class, 'keluaredit']);
 Route::get('/keluar/hapus/{id}', [KeluarController::class, 'keluarhapus']);
 
 // Route to Pinjam
-Route::get('/pinjam/tampil', [PinjamController::class, 'pinjamtampil']);
-Route::post('/pinjam/tambah', [PinjamController::class, 'pinjamtambah']);
+Route::get('/pinjam', function () { return view('page/pinjam'); });
+Route::get('/pinjam/tampil', [PinjamController::class, 'pinjamtampil'])->name('pinjamtampil');
+Route::post('/pinjam/tambah', [PinjamController::class, 'pinjamtambah'])->name('pinjamtambah');
 
 // Route to Request
 Route::get('/request', [BarangController::class, 'barangrequest']);
@@ -49,10 +50,5 @@ Route::get('/request/tampil', [RequestController::class, 'requesttampil'])->name
 Route::post('/request/tambah', [RequestController::class, 'requesttambah'])->name('requesttambah');
 Route::get('/request/edit/{id}', [RequestController::class, 'requestedit']);
 Route::get('/request/hapus/{id}', [RequestController::class, 'requesthapus']);
-
-// Route to Pinjam
-Route::get('/pinjam', function() {
-    return view('page/pinjam');
-});
 
 Auth::routes();
