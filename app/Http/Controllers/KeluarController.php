@@ -20,7 +20,7 @@ class KeluarController extends Controller
 
     //menambah data keluar
     public function keluartambah(Request $request){
-        dd($request->all());
+        // dd($request->all());
         $request->validate( [
             'id_barang' => 'required',
             'jumlah' => 'required',
