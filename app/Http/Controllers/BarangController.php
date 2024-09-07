@@ -48,12 +48,35 @@ class BarangController extends Controller
         return view('/page/stok', compact('barang'));
     }
 
-    // public function barangedit($id)
-    // {
-    //     $barang = BarangModel::find($id);
+    //Barang Edit
+    public function barangedit($id, Request $request)
+    {
+        $request->validate([
+            'nama' => 'required',
+            'stok' => 'nullable|integer',
+            'deskripsi' => 'required',
+            'kendaraan' => 'required',
+        ]);
 
-    //     return view('/page/edit', ['barang' => $barang]);
-    // }
+        $id = BarangModel::find($id);
+        $id->nama = $request->nama;
+        $id->stok = $request->stok ?? 0;
+        $id->deskripsi = $request->deskripsi;
+        $id->kendaraan = $request->kendaraan;
+
+        $id->save();
+
+        return redirect()->route('barangtampil')->with('success', 'Data berhasil diubah');
+    }
+
+    //Barang Hapus
+    public function baranghapus($id)
+    {
+        $barang = BarangModel::find($id);
+        $barang->delete();
+
+        return redirect()->route('barangtampil')->with('success', 'Data berhasil dihapus');
+    }
 
 
     public function barangmasuk()

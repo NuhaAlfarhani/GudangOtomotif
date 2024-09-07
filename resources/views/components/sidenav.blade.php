@@ -7,7 +7,7 @@
                 </div>
                 
                 <button class="nav-link" id="nav-menu" type="button" data-toggle="collapse" data-target="#storageopname" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <div>
+                    <div class="button-icon">
                         <i class="fa-solid fa-archway"></i>
                     </div>
                     Storage Opname
@@ -21,12 +21,15 @@
                         </li>
 
                         <li class="nav-item active" style="margin-left: 1rem">
-                            <a class="nav-link" href="/masuk/tampil"><div class="sb-nav-link-icon"><i class="fa-solid fa-person-dolly-empty"></i></div>Barang Masuk</a> <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/masuk/tampil"><div class="sb-nav-link-icon"><i class="fa-solid fa-dolly"></i></div>Barang Masuk</a> <span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
                 </div>
                 
                 <button class="nav-link" id="nav-menu" type="button" data-toggle="collapse" data-target="#kegiatanbengkel" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <div class="button-icon">
+                        <i class="fas fa-people-carry"></i>
+                    </div>
                     Kegiatan Bengkel
                     <i class="fas fa-caret-down" style="margin-left: auto;"></i>
                 </button>
@@ -34,7 +37,7 @@
                 <div class="collapse navbar-collapse" id="kegiatanbengkel">
                     <ul class="navbar-nav">
                         <li class="nav-item active" style="margin-left: 1rem">
-                            <a class="nav-link" href="/keluar/tampil"><div class="sb-nav-link-icon"><i class="bi bi-box-arrow-up"></i></div>Barang Keluar</a> <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/keluar/tampil"><div class="sb-nav-link-icon"><i class="fa-solid fa-truck-ramp-box"></i></div>Barang Keluar</a> <span class="sr-only">(current)</span></a>
                         </li>
 
                         <li class="nav-item active" style="margin-left: 1rem">
@@ -44,6 +47,9 @@
                 </div>
 
                 <button class="nav-link" id="nav-menu" type="button" data-toggle="collapse" data-target="#storing" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <div class="button-icon">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                    </div>
                     Storing
                     <i class="fas fa-caret-down" style="margin-left: auto;"></i>
                 </button>

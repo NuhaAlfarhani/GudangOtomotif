@@ -55,10 +55,65 @@
                                             <td style="text-align: center">{{ $brg->deskripsi }}</td>
                                             <td style="text-align: center">{{ $brg->kendaraan }}</td>
                                             <td style="text-align: center">
-                                                <a href="/masuk/edit/{{ $brg->id }}" class="btn btn-warning">Edit</a>
-                                                <a href="/masuk/hapus/{{ $brg->id }}" class="btn btn-danger">Hapus</a>
+                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalDataEdit{{$brg->id}}">
+                                                    Edit
+                                                </button>
+                                                <a href="/stok/hapus/{{ $brg->id }}" class="btn btn-danger">Hapus</a>
                                             </td>
                                         </tr>
+
+                                        <div class="modal fade" id="modalDataEdit{{$brg->id}}" tabindex="-1" role="dialog" aria-labelledby="modalDataEditLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalDataEditLabel">
+                                                            Edit Data Barang
+                                                        </h5>
+                                                    </div>
+                                
+                                                    <div class="modal-body">
+                                                        <form name="formdataedit" id="formdataedit" action="{{ route('barangedit', $brg->id) }}" method="POST" enctype="multipart/form-data">
+                                                            @csrf
+                                                            {{ method_field('PUT') }}
+                                                            <div class="form-group row">
+                                                                <label for="nama" class="col-sm-4 col-form-label text-md-right">
+                                                                    Nama Barang
+                                                                </label>
+                                                                <div class="col-md-6">
+                                                                    <input id="nama" type="text" name="nama" class="form-control" value="{{ $brg->nama }}">
+                                                                </div>
+                                                                <br>
+                                                                <br>
+                                                                <label for="deskripsi" class="col-sm-4 col-form-label text-md-right">
+                                                                    Lokasi
+                                                                </label>
+                                                                <div class="col-md-6">
+                                                                    <input id="deskripsi" type="text" name="deskripsi" class="form-control" value="{{ $brg->deskripsi }}">
+                                                                </div>
+                                                                <br>
+                                                                <br>
+                                                                <label for="kendaraan" class="col-sm-4 col-form-label text-md-right">
+                                                                    Jenis Kendaraan
+                                                                </label>
+                                                                <div class="col-md-6">
+                                                                    <input id="kendaraan" type="text" name="kendaraan" class="form-control" value="{{ $brg->kendaraan }}">
+                                                                </div>
+                                                                <br>
+                                                                <br>
+                                                                <div class="form-button">
+                                                                    <button type="submit" class="btn btn-success">
+                                                                        Simpan Data
+                                                                    </button>
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" name="tutup">
+                                                                        Batal
+                                                                    </button>
+                                                                </div>
+                                                            </div> 
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>   
+                                        </div>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -93,7 +148,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalDataTambahLabel">
-                            Tambah Data Barang Masuk
+                            Tambah Data Barang
                         </h5>
                     </div>
 
@@ -139,5 +194,6 @@
                 </div>
             </div>   
         </div>
+
     </div>
 @endsection
