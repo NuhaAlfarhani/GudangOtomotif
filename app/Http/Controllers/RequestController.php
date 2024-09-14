@@ -15,7 +15,7 @@ class RequestController extends Controller
         $datarequest = RequestModel::paginate(10);
         $databarang = BarangModel::all();
 
-        return view('page/request', ['req' => $datarequest, 'barang' => $databarang]);
+        return view('page/request', ['request' => $datarequest, 'barang' => $databarang]);
     }
 
     // menambah data request

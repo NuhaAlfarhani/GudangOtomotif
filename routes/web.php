@@ -54,4 +54,15 @@ Route::post('/request/tambah', [RequestController::class, 'requesttambah'])->nam
 // Route::get('/request/edit/{id}', [RequestController::class, 'requestedit']);
 // Route::get('/request/hapus/{id}', [RequestController::class, 'requesthapus']);
 
+// Route to about
+Route::get('/about', function() {
+    return view('page/about');
+});
+
+// Route to logout
+// Route::get('/logout', function() {
+//     Auth::logout();
+//     return redirect('/login');
+// });
+
 Auth::routes();

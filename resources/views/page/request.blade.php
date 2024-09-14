@@ -34,14 +34,14 @@
                                 </thead>
 
                                 <tbody>
-                                    @foreach ($req as $request)
+                                    @foreach ($request as $transaksi)
                                         <tr>
-                                            <td style="text-align: center">{{ $request->id_request }}</td>
-                                            <td style="text-align: center">{{ $request->barang->nama }}</td>
-                                            <td style="text-align: center">{{ $request->jumlah }}</td>
+                                            <td style="text-align: center">{{ $transaksi->id_request }}</td>
+                                            <td style="text-align: center">{{ $transaksi->barang->nama }}</td>
+                                            <td style="text-align: center">{{ $transaksi->jumlah }}</td>
                                             <td style="text-align: center">
-                                                <a href="/masuk/edit/{{ $request->id }}" class="btn btn-warning">Edit</a>
-                                                <a href="/masuk/hapus/{{ $request->id }}" class="btn btn-danger">Hapus</a>
+                                                <a href="/masuk/edit/{{ $transaksi->id }}" class="btn btn-warning">Edit</a>
+                                                <a href="/masuk/hapus/{{ $transaksi->id }}" class="btn btn-danger">Hapus</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -53,7 +53,7 @@
             </div>
         </main>
 
-        {{ $req->links()}}
+        
         <div class="modal fade" id="modalDataTambah" tabindex="-1" role="dialog" aria-labelledby="modalDataTambahLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
