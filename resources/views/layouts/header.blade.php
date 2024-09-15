@@ -27,6 +27,7 @@
 
     <div id="layoutSidenav">
         @include('components.sidenav')
+        
         @yield('content')
     </div>
 

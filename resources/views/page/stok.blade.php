@@ -3,6 +3,8 @@
 @section('content')
     <div id="layoutSidenav_content">
         <main>
+            @include('components.alert')
+            
             <div class="container-fluid">
                 <div class="breadcrumb mb-4">
                     <h2>
@@ -38,6 +40,7 @@
                                 <thead>
                                     <tr>
                                         <th style="text-align: center">Nomor</th>
+                                        <th style="text-align: center">ID Barang</th>
                                         <th style="text-align: center">Nama Barang</th>
                                         <th style="text-align: center">Quantity Stock</th>
                                         <th style="text-align: center">Deskripsi Lokasi</th>
@@ -49,20 +52,21 @@
                                 <tbody>
                                     @foreach ($barang as $brg)
                                         <tr>
-                                            <td style="text-align: center">{{ $brg->id }}</td>
+                                            <td style="text-align: center">{{ $loop->iteration }}</td>
+                                            <td style="text-align: center">{{ $brg->id_barang }}</td>
                                             <td style="text-align: center">{{ $brg->nama }}</td>
                                             <td style="text-align: center">{{ $brg->stok }}</td>
                                             <td style="text-align: center">{{ $brg->deskripsi }}</td>
                                             <td style="text-align: center">{{ $brg->kendaraan }}</td>
                                             <td style="text-align: center">
-                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalDataEdit{{$brg->id}}">
+                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalDataEdit{{$brg->id_barang}}">
                                                     Edit
                                                 </button>
-                                                <a href="/stok/hapus/{{ $brg->id }}" class="btn btn-danger">Hapus</a>
+                                                <a href="/stok/hapus/{{ $brg->id_barang }}" class="btn btn-danger">Hapus</a>
                                             </td>
                                         </tr>
 
-                                        <div class="modal fade" id="modalDataEdit{{$brg->id}}" tabindex="-1" role="dialog" aria-labelledby="modalDataEditLabel" aria-hidden="true">
+                                        <div class="modal fade" id="modalDataEdit{{$brg->id_barang}}" tabindex="-1" role="dialog" aria-labelledby="modalDataEditLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -72,10 +76,18 @@
                                                     </div>
                                 
                                                     <div class="modal-body">
-                                                        <form name="formdataedit" id="formdataedit" action="{{ route('barangedit', $brg->id) }}" method="POST" enctype="multipart/form-data">
+                                                        <form name="formdataedit" id="formdataedit" action="{{ route('barangedit', $brg->id_barang) }}" method="POST" enctype="multipart/form-data">
                                                             @csrf
                                                             {{ method_field('PUT') }}
                                                             <div class="form-group row">
+                                                                <label for="id_barang" class="col-sm-4 col-form-label text-md-right">
+                                                                    Kode Barang
+                                                                </label>
+                                                                <div class="col-md-6">
+                                                                    <input id="id_barang" type="text" name="id_barang" class="form-control" value="{{ $brg->id_barang }}" readonly>
+                                                                </div>
+                                                                <br>
+                                                                <br>
                                                                 <label for="nama" class="col-sm-4 col-form-label text-md-right">
                                                                     Nama Barang
                                                                 </label>
@@ -156,6 +168,14 @@
                         <form name="formdatatambah" id="formdatatambah" action="{{ route('barangtambah') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
+                                <label for="id_barang" class="col-sm-4 col-form-label text-md-right">
+                                    Kode Barang
+                                </label>
+                                <div class="col-md-6">
+                                    <input id="id_barang" type="text" name="id_barang" class="form-control" placeholder="Masukkan Kode Barang" required>
+                                </div>
+                                <br>
+                                <br>
                                 <label for="nama" class="col-sm-4 col-form-label text-md-right">
                                     Nama Barang
                                 </label>
@@ -194,6 +214,5 @@
                 </div>
             </div>   
         </div>
-
     </div>
 @endsection

@@ -18,6 +18,7 @@ class BarangController extends Controller
     public function barangtambah(Request $request)
     {
         $request->validate([
+            'id_barang' => 'required',
             'nama' => 'required',
             'stok' => 'nullable|integer',
             'deskripsi' => 'required',
@@ -27,12 +28,19 @@ class BarangController extends Controller
         $stok = $request->stok ?? 0;
         // dd($request->all());
 
+        // duplikasi data
+        if (BarangModel::where('id_barang', $request->id_barang)->exists()) {
+            return redirect()->back()->withErrors(['id_barang' => 'Barang sudah ada.']);
+        }
+        
         BarangModel::create([
+            'id_barang' => $request->id_barang,
             'nama' => $request->nama,
             'stok' => $stok,
             'deskripsi' => $request->deskripsi,
             'kendaraan' => $request->kendaraan,
         ]);
+
 
         return redirect()->route('barangtampil')->with('success', 'Data berhasil ditambahkan');
     }
