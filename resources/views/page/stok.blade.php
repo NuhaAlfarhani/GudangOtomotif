@@ -4,7 +4,7 @@
     <div id="layoutSidenav_content">
         <main>
             @include('components.alert')
-            
+
             <div class="container-fluid">
                 <div class="breadcrumb mb-4">
                     <h2>
@@ -26,6 +26,8 @@
                     <div class="card mb-4">
                         <div class="search">
                             <form action="{{ route('cari') }}" method="GET" class="form-inline">
+                                <a href="{{ route('opnametampil') }}" class="btn btn-info" style="margin-right:1rem">Start Opname</a>
+                                
                                 <div class="input-group">
                                     <input type="text" name="cari" class="form-control" placeholder="Cari Barang..." aria-label="Cari" aria-describedby="button-search">
                                     <div class="input-group-append">
@@ -51,20 +53,37 @@
 
                                 <tbody>
                                     @foreach ($barang as $brg)
-                                        <tr>
-                                            <td style="text-align: center">{{ $loop->iteration }}</td>
-                                            <td style="text-align: center">{{ $brg->id_barang }}</td>
-                                            <td style="text-align: center">{{ $brg->nama }}</td>
-                                            <td style="text-align: center">{{ $brg->stok }}</td>
-                                            <td style="text-align: center">{{ $brg->deskripsi }}</td>
-                                            <td style="text-align: center">{{ $brg->kendaraan }}</td>
-                                            <td style="text-align: center">
-                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalDataEdit{{$brg->id_barang}}">
-                                                    Edit
-                                                </button>
-                                                <a href="/stok/hapus/{{ $brg->id_barang }}" class="btn btn-danger">Hapus</a>
-                                            </td>
-                                        </tr>
+                                        @if($loop->iteration % 2 == 0)
+                                            <tr style="background-color:#34374C">
+                                                <td style="text-align: center">{{ $loop->iteration }}</td>
+                                                <td style="text-align: center">{{ $brg->id_barang }}</td>
+                                                <td style="text-align: center">{{ $brg->nama }}</td>
+                                                <td style="text-align: center">{{ $brg->stok }}</td>
+                                                <td style="text-align: center">{{ $brg->deskripsi }}</td>
+                                                <td style="text-align: center">{{ $brg->kendaraan }}</td>
+                                                <td style="text-align: center">
+                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalDataEdit{{$brg->id_barang}}">
+                                                        Edit
+                                                    </button>
+                                                    <a href="/stok/hapus/{{ $brg->id_barang }}" class="btn btn-danger">Hapus</a>
+                                                </td>
+                                            </tr>
+                                        @else
+                                            <tr>
+                                                <td style="text-align: center">{{ $loop->iteration }}</td>
+                                                <td style="text-align: center">{{ $brg->id_barang }}</td>
+                                                <td style="text-align: center">{{ $brg->nama }}</td>
+                                                <td style="text-align: center">{{ $brg->stok }}</td>
+                                                <td style="text-align: center">{{ $brg->deskripsi }}</td>
+                                                <td style="text-align: center">{{ $brg->kendaraan }}</td>
+                                                <td style="text-align: center">
+                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalDataEdit{{$brg->id_barang}}">
+                                                        Edit
+                                                    </button>
+                                                    <a href="/stok/hapus/{{ $brg->id_barang }}" class="btn btn-danger">Hapus</a>
+                                                </td>
+                                            </tr>
+                                        @endif
 
                                         <div class="modal fade" id="modalDataEdit{{$brg->id_barang}}" tabindex="-1" role="dialog" aria-labelledby="modalDataEditLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
@@ -148,7 +167,12 @@
                             
                             Halaman : {{ $barang->currentPage() }} <br/>
                             Jumlah Data : {{ $barang->total() }} <br/>
-                            
+                            Data Per Halaman : 
+                            <form action="{{ route('paginate') }}" method="POST" class="form-inline d-inline">
+                                @csrf
+                                <input type="number" name="perPage" class="form-control" value="{{ $barang->perPage() }}" min="1" style="width: 3rem;">
+                                <button type="submit" class="btn btn-primary ml-2">Update</button>
+                            </form>
                         </div>
                     </div>
                 </div>
