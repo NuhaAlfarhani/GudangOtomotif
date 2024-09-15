@@ -44,10 +44,14 @@
                                             <td style="text-align: center">{{ $transaksi->barang->kendaraan }}</td>
                                             <td style="text-align: center">{{ $transaksi->tanggal }}</td>
                                             <td style="text-align: center">
-                                                <a href="/keluar/edit/{{ $transaksi->id }}" class="btn btn-warning">Edit</a>
-                                                <a href="/keluar/hapus/{{ $transaksi->id }}" class="btn btn-danger">Hapus</a>
+                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalDataEdit{{$transaksi->id_keluar}}">
+                                                    Edit
+                                                </button>
+                                                <a href="/keluar/hapus/{{ $transaksi->id_keluar }}" class="btn btn-danger">Hapus</a>
                                             </td>
                                         </tr>
+
+                                        
                                     @endforeach
                                 </tbody>
                             </table>
@@ -57,7 +61,6 @@
             </div>
         </main>
 
-        {{ $keluar->links()}}
         <div class="modal fade" id="modalDataTambah" tabindex="-1" role="dialog" aria-labelledby="modalDataTambahLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">

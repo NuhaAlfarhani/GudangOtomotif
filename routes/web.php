@@ -4,6 +4,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\MasukController;
 use App\Http\Controllers\KeluarController;
+use App\Http\Controllers\OpnameController;
 use App\Http\Controllers\PinjamController;
 use App\Http\Controllers\RequestController;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +27,12 @@ Route::get('/stok/cari', [BarangController::class, 'barangcari'])->name('cari');
 Route::put('/stok/edit/{id}', [BarangController::class, 'barangedit'])->name('barangedit');
 // Route::post('/stok/update/{id}', [BarangController::class, 'barangupdate'])->name('barangupdate');
 Route::get('/stok/hapus/{id}', [BarangController::class, 'baranghapus']);
+Route::post('/stok/paginate', [BarangController::class, 'paginate'])->name('paginate');
 
+
+Route::get('/opname', [OpnameController::class, 'opnametampil'])->name('opnametampil');
+Route::post('/opname/calculate', [OpnameController::class, 'opnameCalculate'])->name('opnameCalculate');
+Route::get('/opname/export', [OpnameController::class, 'export'])->name('export');
 
 // Route to barang masuk
 Route::get('/masuk', [BarangController::class, 'barangmasuk']);
@@ -39,8 +45,8 @@ Route::post('/masuk/tambah', [MasukController::class, 'masuktambah'])->name('mas
 Route::get('/keluar', [BarangController::class, 'barangkeluar']);
 Route::get('/keluar/tampil', [KeluarController::class, 'keluartampil'])->name('keluartampil');
 Route::post('/keluar/tambah', [KeluarController::class, 'keluartambah'])->name('keluartambah');
-// Route::get('/keluar/edit/{id}', [KeluarController::class, 'keluaredit']);
-// Route::get('/keluar/hapus/{id}', [KeluarController::class, 'keluarhapus']);
+Route::put('/keluar/edit/{id_keluar}', [KeluarController::class, 'keluaredit'])->name('keluaredit');
+Route::get('/keluar/hapus/{id_keluar}', [KeluarController::class, 'keluarhapus'])->name('keluarhapus');
 
 // Route to Pinjam
 Route::get('/pinjam', function () { return view('page/pinjam'); });

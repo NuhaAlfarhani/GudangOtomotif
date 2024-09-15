@@ -21,6 +21,6 @@ class MasukModel extends Model
 
     public function barang()
     {
-        return $this->belongsTo(BarangModel::class, 'id_barang', 'id');
+        return $this->belongsTo(BarangModel::class, 'id_barang', 'id_barang');
     }
 }
