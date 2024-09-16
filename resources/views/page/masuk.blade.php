@@ -52,96 +52,48 @@
                                 <tbody>
                                     @foreach ($masuk as $transaksi)
                                         @if($loop->iteration % 2 == 0)
-                                            <tr style="background-color:#34374C">
-                                                <td style="text-align: center">{{ $loop->iteration }}</td>
-                                                <td style="text-align: center">{{ $transaksi->barang->id_barang }}</td>
-                                                <td style="text-align: center">{{ $transaksi->barang->nama }}</td>
-                                                <td style="text-align: center">{{ $transaksi->jumlah }}</td>
-                                                <td style="text-align: center">{{ $transaksi->barang->kendaraan }}</td>
-                                                <td style="text-align: center">{{ \Carbon\Carbon::parse($transaksi->tanggal)->format('d-m-Y') }}</td>
-                                                <td style="text-align: center">
-                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalDataEdit{{$transaksi->barang->id_barang}}">
-                                                        Edit
-                                                    </button>
-                                                    <a href="/stok/hapus/{{ $transaksi->barang->id_barang }}" class="btn btn-danger">Hapus</a>
-                                                </td>
-                                            </tr>
-                                        @else
                                             <tr>
                                                 <td style="text-align: center">{{ $loop->iteration }}</td>
                                                 <td style="text-align: center">{{ $transaksi->barang->id_barang }}</td>
                                                 <td style="text-align: center">{{ $transaksi->barang->nama }}</td>
                                                 <td style="text-align: center">{{ $transaksi->jumlah }}</td>
                                                 <td style="text-align: center">{{ $transaksi->barang->kendaraan }}</td>
-                                                <td style="text-align: center">{{ \Carbon\Carbon::parse($transaksi->tanggal)->format('d-m-Y') }}</td>
+                                                <td style="text-align: center">{{ $transaksi->created_at->format('d / m / Y H:i') }}</td>
                                                 <td style="text-align: center">
-                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalDataEdit{{$transaksi->barang->id_barang}}">
-                                                        Edit
-                                                    </button>
-                                                    <a href="/stok/hapus/{{ $transaksi->barang->id_barang }}" class="btn btn-danger">Hapus</a>
+                                                <div class="d-flex justify-content-center">
+                                                        <form action="{{ route('masukhapus', $transaksi->id_masuk) }}" method="POST" onsubmit="return confirmDelete()">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @else
+                                            <tr style="background-color:#34374C">
+                                                <td style="text-align: center">{{ $loop->iteration }}</td>
+                                                <td style="text-align: center">{{ $transaksi->barang->id_barang }}</td>
+                                                <td style="text-align: center">{{ $transaksi->barang->nama }}</td>
+                                                <td style="text-align: center">{{ $transaksi->jumlah }}</td>
+                                                <td style="text-align: center">{{ $transaksi->barang->kendaraan }}</td>
+                                                <td style="text-align: center">{{ $transaksi->created_at->format('d / m / Y H:i') }}</td>
+                                                <td style="text-align: center">
+                                                    <div class="d-flex justify-content-center">
+                                                        <form action="{{ route('masukhapus', $transaksi->id_masuk) }}" method="POST" onsubmit="return confirmDelete()">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                                        </form>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endif
 
-                                        <div class="modal fade" id="modalDataEdit{{$transaksi->id_barang}}" tabindex="-1" role="dialog" aria-labelledby="modalDataEditLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalDataEditLabel">
-                                                            Edit Data Barang
-                                                        </h5>
-                                                    </div>
-                                
-                                                    <div class="modal-body">
-                                                        <form name="formdataedit" id="formdataedit" action="{{ route('barangedit', $transaksi->id_barang) }}" method="POST" enctype="multipart/form-data">
-                                                            @csrf
-                                                            {{ method_field('PUT') }}
-                                                            <div class="form-group row">
-                                                                <label for="id_barang" class="col-sm-4 col-form-label text-md-right">
-                                                                    Kode Barang
-                                                                </label>
-                                                                <div class="col-md-6">
-                                                                    <input id="id_barang" type="text" name="id_barang" class="form-control bg-dark text-white" value="{{ $transaksi->id_barang }}" readonly>
-                                                                </div>
-                                                                <br>
-                                                                <br>
-                                                                <label for="id_barang" class="col-sm-4 col-form-label text-md-right">
-                                                                    Nama Barang
-                                                                </label>
-                                                                <div class="col-md-6">
-                                                                    <input id="id_barang" type="text" name="id_barang" class="form-control bg-dark text-white" value="{{ $transaksi->barang->nama }}" readonly>
-                                                                </div>
-                                                                <br>
-                                                                <br>
-                                                                <label for="jumlah" class="col-sm-4 col-form-label text-md-right">
-                                                                    Jumlah
-                                                                </label>
-                                                                <div class="col-md-6">
-                                                                    <input id="jumlah" type="number" name="jumlah" class="form-control" value="{{ $transaksi->jumlah }}">
-                                                                </div>
-                                                                <br>
-                                                                <br>
-                                                                <label for="tanggal" class="col-sm-4 col-form-label text-md-right">
-                                                                    Tanggal
-                                                                </label>
-                                                                <div class="col-md-6">
-                                                                    <input id="tanggal" type="date" name="tanggal" class="form-control bg-dark text-white" value="{{ date('Y-m-d') }}" readonly>
-                                                                </div>
-
-                                                                <div class="form-button">
-                                                                    <button type="submit" class="btn btn-success">
-                                                                        Simpan Data
-                                                                    </button>
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" name="tutup">
-                                                                        Batal
-                                                                    </button>
-                                                                </div>
-                                                            </div> 
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>   
-                                        </div>
+                                        <script>
+                                            function confirmDelete() {
+                                                return confirm('Are you sure you want to delete this item?');
+                                            }
+                                        </script>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -167,7 +119,7 @@
                             Data Per Halaman : 
                             <form action="{{ route('paginate') }}" method="POST" class="form-inline d-inline">
                                 @csrf
-                                <input type="number" name="perPage" class="form-control" value="{{ $masuk->perPage() }}" min="1" style="width: 3rem;">
+                                <input type="number" name="perPage" class="form-control" value="{{ $masuk->perPage() }}" min="1" style="width: 3rem; text-align:center">
                                 <button type="submit" class="btn btn-primary ml-2">Update</button>
                             </form>
                         </div>
@@ -214,7 +166,7 @@
                                     Tanggal
                                 </label>
                                 <div class="col-md-6">
-                                    <input id="tanggal" type="date" name="tanggal" class="form-control" value="{{ date('Y-m-d') }}" readonly>
+                                    <input id="tanggal" type="text" name="tanggal" class="form-control" value="{{ \Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->format('d / m / Y H:i') }}" readonly>
                                 </div>
                                 <br>
                                 <br>
