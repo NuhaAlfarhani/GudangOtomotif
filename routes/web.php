@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\TestController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\MasukController;
 use App\Http\Controllers\KeluarController;
@@ -11,9 +10,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 // Route to login
-Route::get('/login', function() {
-    return view('login');
-});
+// Route::get('/login', function() {
+//     return view('login');
+// });
 
 // Route to home
 Route::get('/', function() {
@@ -21,49 +20,58 @@ Route::get('/', function() {
 });
 
 // Route to barang
-Route::get('/stok', [BarangController::class, 'barangtampil'])->name('barangtampil');
-Route::post('/stok/tambah', [BarangController::class, 'barangtambah'])->name('barangtambah');
-Route::get('/stok/cari', [BarangController::class, 'barangcari'])->name('cari');
-Route::put('/stok/edit/{id}', [BarangController::class, 'barangedit'])->name('barangedit');
-// Route::post('/stok/update/{id}', [BarangController::class, 'barangupdate'])->name('barangupdate');
-Route::get('/stok/hapus/{id}', [BarangController::class, 'baranghapus']);
-Route::post('/stok/paginate', [BarangController::class, 'paginate'])->name('paginate');
+Route::prefix('stok')->group(function () {
+    Route::get('/', [BarangController::class, 'barangtampil'])->name('barangtampil');
+    Route::post('/tambah', [BarangController::class, 'barangtambah'])->name('barangtambah');
+    Route::get('/cari', [BarangController::class, 'barangcari'])->name('cari');
+    Route::put('/edit/{id}', [BarangController::class, 'barangedit'])->name('barangedit');
+    Route::delete('/hapus/{id}', [BarangController::class, 'baranghapus'])->name('baranghapus');
+    Route::post('/paginate', [BarangController::class, 'paginate'])->name('paginate');
+});
 
-
-Route::get('/opname', [OpnameController::class, 'opnametampil'])->name('opnametampil');
-Route::post('/opname/calculate', [OpnameController::class, 'opnameCalculate'])->name('opnameCalculate');
-Route::get('/opname/export', [OpnameController::class, 'export'])->name('export');
+// Route to opname
+Route::prefix('opname')->group(function () {
+    Route::get('/', [OpnameController::class, 'opnametampil'])->name('opnametampil');
+    Route::post('/calculate', [OpnameController::class, 'opnameCalculate'])->name('opnameCalculate');
+    Route::get('/export', [OpnameController::class, 'export'])->name('export');
+});
 
 // Route to barang masuk
-Route::get('/masuk', [BarangController::class, 'barangmasuk']);
-Route::get('/masuk/tampil', [MasukController::class, 'masuktampil'])->name('masuktampil');
-Route::post('/masuk/tambah', [MasukController::class, 'masuktambah'])->name('masuktambah');
-// Route::get('/masuk/edit/{id}', [MasukController::class, 'masukedit']);
-// Route::get('/masuk/hapus/{id}', [MasukController::class, 'masukhapus']);
+Route::prefix('masuk')->group(function () {
+    Route::get('/', [BarangController::class, 'barangmasuk']);
+    Route::get('/tampil', [MasukController::class, 'masuktampil'])->name('masuktampil');
+    Route::post('/tambah', [MasukController::class, 'masuktambah'])->name('masuktambah');
+    Route::delete('/hapus/{id_masuk}', [MasukController::class, 'masukhapus'])->name('masukhapus');
+});
 
 // Route to barang keluar
-Route::get('/keluar', [BarangController::class, 'barangkeluar']);
-Route::get('/keluar/tampil', [KeluarController::class, 'keluartampil'])->name('keluartampil');
-Route::post('/keluar/tambah', [KeluarController::class, 'keluartambah'])->name('keluartambah');
-Route::put('/keluar/edit/{id_keluar}', [KeluarController::class, 'keluaredit'])->name('keluaredit');
-Route::get('/keluar/hapus/{id_keluar}', [KeluarController::class, 'keluarhapus'])->name('keluarhapus');
+Route::prefix('keluar')->group(function () {
+    Route::get('/', [BarangController::class, 'barangkeluar']);
+    Route::get('/tampil', [KeluarController::class, 'keluartampil'])->name('keluartampil');
+    Route::post('/tambah', [KeluarController::class, 'keluartambah'])->name('keluartambah');
+    Route::delete('/hapus/{id_keluar}', [KeluarController::class, 'keluarhapus'])->name('keluarhapus');
+});
 
 // Route to Pinjam
-Route::get('/pinjam', function () { return view('page/pinjam'); });
-Route::get('/pinjam/tampil', [PinjamController::class, 'pinjamtampil'])->name('pinjamtampil');
-Route::post('/pinjam/tambah', [PinjamController::class, 'pinjamtambah'])->name('pinjamtambah');
+Route::prefix('pinjam')->group(function () {
+    Route::get('/', function () { return view('page/pinjam'); });
+    Route::get('/tampil', [PinjamController::class, 'pinjamtampil'])->name('pinjamtampil');
+    Route::post('/tambah', [PinjamController::class, 'pinjamtambah'])->name('pinjamtambah');
+});
 
 // Route to Request
-Route::get('/request', [BarangController::class, 'barangrequest']);
-Route::get('/request/tampil', [RequestController::class, 'requesttampil'])->name('requesttampil');
-Route::post('/request/tambah', [RequestController::class, 'requesttambah'])->name('requesttambah');
-// Route::get('/request/edit/{id}', [RequestController::class, 'requestedit']);
-// Route::get('/request/hapus/{id}', [RequestController::class, 'requesthapus']);
+Route::prefix('request')->group(function () {
+    Route::get('/', [RequestController::class, 'requesttampil']);
+    Route::get('/tampil', [RequestController::class, 'requesttampil'])->name('requesttampil');
+    Route::post('/tambah', [RequestController::class, 'requesttambah'])->name('requesttambah');
+    // Route::get('/edit/{id}', [RequestController::class, 'requestedit']);
+    // Route::get('/hapus/{id}', [RequestController::class, 'requesthapus']);
+});
 
 // Route to about
-Route::get('/about', function() {
-    return view('page/about');
-});
+// Route::get('/about', function() {
+//     return view('page/about');
+// });
 
 // Route to logout
 // Route::get('/logout', function() {
