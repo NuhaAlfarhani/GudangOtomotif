@@ -95,28 +95,6 @@ class BarangController extends Controller
         $barang = BarangModel::find($id_barang);
         $barang->delete();
 
-        return redirect()->route('barangtampil')->with('success', 'Data berhasil dihapus');
-    }
-
-
-    public function barangmasuk()
-    {
-        $databarang = BarangModel::orderBy('id', 'asc')->paginate(10);
-
-        return view('page/masuk', ['barang' => $databarang]);
-    }
-
-    public function barangkeluar()
-    {
-        $databarang = BarangModel::orderBy('id', 'asc')->paginate(10);
-
-        return view('page/keluar', ['barang' => $databarang]);
-    }
-
-    public function barangrequest()
-    {
-        $databarang = BarangModel::orderBy('id', 'asc')->paginate(10);
-
-        return view('page/request', ['barang' => $databarang]);
+        return back()->with('success', 'Data berhasil dihapus');
     }
 }

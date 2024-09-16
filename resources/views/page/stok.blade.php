@@ -42,7 +42,7 @@
                                 <thead>
                                     <tr>
                                         <th style="text-align: center">Nomor</th>
-                                        <th style="text-align: center">ID Barang</th>
+                                        <th style="text-align: center">Kode Barang</th>
                                         <th style="text-align: center">Nama Barang</th>
                                         <th style="text-align: center">Quantity Stock</th>
                                         <th style="text-align: center">Deskripsi Lokasi</th>
@@ -54,21 +54,6 @@
                                 <tbody>
                                     @foreach ($barang as $brg)
                                         @if($loop->iteration % 2 == 0)
-                                            <tr style="background-color:#34374C">
-                                                <td style="text-align: center">{{ $loop->iteration }}</td>
-                                                <td style="text-align: center">{{ $brg->id_barang }}</td>
-                                                <td style="text-align: center">{{ $brg->nama }}</td>
-                                                <td style="text-align: center">{{ $brg->stok }}</td>
-                                                <td style="text-align: center">{{ $brg->deskripsi }}</td>
-                                                <td style="text-align: center">{{ $brg->kendaraan }}</td>
-                                                <td style="text-align: center">
-                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalDataEdit{{$brg->id_barang}}">
-                                                        Edit
-                                                    </button>
-                                                    <a href="/stok/hapus/{{ $brg->id_barang }}" class="btn btn-danger">Hapus</a>
-                                                </td>
-                                            </tr>
-                                        @else
                                             <tr>
                                                 <td style="text-align: center">{{ $loop->iteration }}</td>
                                                 <td style="text-align: center">{{ $brg->id_barang }}</td>
@@ -77,13 +62,48 @@
                                                 <td style="text-align: center">{{ $brg->deskripsi }}</td>
                                                 <td style="text-align: center">{{ $brg->kendaraan }}</td>
                                                 <td style="text-align: center">
-                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalDataEdit{{$brg->id_barang}}">
-                                                        Edit
-                                                    </button>
-                                                    <a href="/stok/hapus/{{ $brg->id_barang }}" class="btn btn-danger">Hapus</a>
+                                                    <div class="d-flex justify-content-center">
+                                                        <button type="button" class="btn btn-warning mr-2" data-toggle="modal" data-target="#modalDataEdit{{$brg->id_barang}}">
+                                                            Edit
+                                                        </button>
+                                                        
+                                                        <form action="{{ route('baranghapus', $brg->id_barang) }}" method="POST" onsubmit="return confirmDelete()">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @else
+                                            <tr style="background-color:#34374C">
+                                                <td style="text-align: center">{{ $loop->iteration }}</td>
+                                                <td style="text-align: center">{{ $brg->id_barang }}</td>
+                                                <td style="text-align: center">{{ $brg->nama }}</td>
+                                                <td style="text-align: center">{{ $brg->stok }}</td>
+                                                <td style="text-align: center">{{ $brg->deskripsi }}</td>
+                                                <td style="text-align: center">{{ $brg->kendaraan }}</td>
+                                                <td style="text-align: center">
+                                                    <div class="d-flex justify-content-center">
+                                                        <button type="button" class="btn btn-warning mr-2" data-toggle="modal" data-target="#modalDataEdit{{$brg->id_barang}}">
+                                                            Edit
+                                                        </button>
+                                                        
+                                                        <form action="{{ route('baranghapus', $brg->id_barang) }}" method="POST" onsubmit="return confirmDelete()">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                                        </form>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endif
+                                        
+                                        <script>
+                                            function confirmDelete() {
+                                                return confirm('Are you sure you want to delete this item?');
+                                            }
+                                        </script>
 
                                         <div class="modal fade" id="modalDataEdit{{$brg->id_barang}}" tabindex="-1" role="dialog" aria-labelledby="modalDataEditLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
@@ -170,7 +190,7 @@
                             Data Per Halaman : 
                             <form action="{{ route('paginate') }}" method="POST" class="form-inline d-inline">
                                 @csrf
-                                <input type="number" name="perPage" class="form-control" value="{{ $barang->perPage() }}" min="1" style="width: 3rem;">
+                                <input type="number" name="perPage" class="form-control" value="{{ $barang->perPage() }}" min="1" style="width: 3rem; text-align:center">
                                 <button type="submit" class="btn btn-primary ml-2">Update</button>
                             </form>
                         </div>
