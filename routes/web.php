@@ -64,6 +64,7 @@ Route::prefix('request')->group(function () {
     Route::get('/', [RequestController::class, 'requesttampil']);
     Route::get('/tampil', [RequestController::class, 'requesttampil'])->name('requesttampil');
     Route::post('/tambah', [RequestController::class, 'requesttambah'])->name('requesttambah');
+    Route::put('/status/{id}', [RequestController::class, 'requestStatusChange'])->name('requestStatusChange');
     // Route::get('/edit/{id}', [RequestController::class, 'requestedit']);
     // Route::get('/hapus/{id}', [RequestController::class, 'requesthapus']);
 });

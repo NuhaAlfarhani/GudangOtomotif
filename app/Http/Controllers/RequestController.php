@@ -20,16 +20,35 @@ class RequestController extends Controller
 
     // menambah data request
     public function requesttambah(Request $request){
-        $this->validate($request, [
+        // dd($request->all());
+        $request->validate([
             'id_barang' => 'required',
-            'jumlah' => 'required'
+            'jumlah' => 'required|integer',
+            'status' => 'nullable|in:diminta,selesai'
         ]);
+
+        $status = $request->status ?? 'diminta';
 
         RequestModel::create([
             'id_barang' => $request->id_barang,
-            'jumlah' => $request->jumlah
+            'jumlah' => $request->jumlah,
+            'status' => $status
         ]);
         
-        return redirect()->route('requesttampil')->with('success', 'Data berhasil ditambahkan');
+        return back()->with('success', 'Data berhasil ditambahkan');
+    }
+
+    // mengubah status request
+    public function requestStatusChange($id_request, Request $request){
+        dd($request->all());
+        $request->validate([
+            'status' => 'required|in:diminta,selesai'
+        ]);
+
+        $id_request = RequestModel::find($id_request);
+        $id_request->status = $request->status;
+        $id_request->save();
+
+        return back()->with('success', 'Status berhasil diubah');
     }
 }

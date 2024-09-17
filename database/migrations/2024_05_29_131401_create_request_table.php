@@ -16,6 +16,7 @@ return new class extends Migration
             $table->uuid('id_barang')->nullable();
             $table->foreign('id_barang')->references('id_barang')->on('barang')->onDelete('cascade');
             $table->string('jumlah');
+            $table->enum('status', ['diminta', 'selesai'])->default('diminta');
             $table->timestamps();
         });
     }

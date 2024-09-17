@@ -15,11 +15,12 @@ class RequestModel extends Model
 
     protected $fillable = [
         'id_barang',
-        'jumlah'
+        'jumlah',
+        'status'
     ];
 
     public function barang()
     {
-        return $this->belongsTo(BarangModel::class, 'id_barang', 'id');
+        return $this->belongsTo(BarangModel::class, 'id_barang', 'id_barang');
     }
 }
