@@ -10,10 +10,11 @@ class PinjamModel extends Model
     use HasFactory;
 
     protected $table = 'pinjam';
-    protected $primaryKey = 'PKB';
+
+    public $incrementing = false;
+    protected $primaryKey = 'pkb';
     protected $fillable = [
-        'PKB',
-        'tanggal',
+        'pkb',
         'daftar_barang',
         'alasan'
     ];

@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pinjam', function (Blueprint $table) {
-            $table->uuid('PKB')->primary();
-            $table->date('tanggal');
+            $table->uuid('pkb')->primary();
             $table->string('daftar_barang');
             $table->string('alasan');
             $table->timestamps();

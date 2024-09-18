@@ -3,6 +3,8 @@
 @section('content')
     <div id="layoutSidenav_content">
         <main>
+            @include('components.alert')
+
             <div class="container-fluid">
                 <div class="breadcrumb mb-4">
                     <h2>
@@ -26,6 +28,7 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
+                                        <td style="text-align: center">Nomor</td>
                                         <td style="text-align: center">PKB</td>
                                         <td style="text-align: center">Tanggal</td>
                                         <td style="text-align: center">Daftar Barang (Jumlah)</td>
@@ -37,13 +40,17 @@
                                 <tbody>
                                     @foreach ($pinjam as $transaksi)
                                         <tr>
-                                            <td style="text-align: center">{{ $transaksi->id }}</td>
-                                            <td style="text-align: center">{{ $transaksi->tanggal }}</td>
+                                            <td style="text-align: center">{{ $loop->iteration }}</td>
+                                            <td style="text-align: center">{{ $transaksi->pkb }}</td>
+                                            <td style="text-align: center">{{ $transaksi->created_at }}</td>
                                             <td style="text-align: center">{{ $transaksi->daftar_barang }}</td>
                                             <td style="text-align: center">{{ $transaksi->alasan }}</td>
                                             <td style="text-align: center">
-                                                <a href="/masuk/edit/{{ $transaksi->id }}" class="btn btn-warning">Edit</a>
-                                                <a href="/masuk/hapus/{{ $transaksi->id }}" class="btn btn-danger">Hapus</a>
+                                                <form action="/pinjam/hapus/{{ $transaksi->pkb }}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">Hapus</button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -70,19 +77,11 @@
                             @csrf
                             <div class="form-group row">
                                 
-                                <label for="PKB" class="col-sm-4 col-form-label text-md-right">
+                                <label for="pkb" class="col-sm-4 col-form-label text-md-right">
                                     PKB
                                 </label>
                                 <div class="col-md-6">
-                                    <input id="PKB" type="text" name="PKB" class="form-control" placeholder="Masukkan PKB" required>
-                                </div>
-                                <br>
-                                <br>
-                                <label for="tanggal" class="col-sm-4 col-form-label text-md-right">
-                                    Tanggal
-                                </label>
-                                <div class="col-md-6">
-                                    <input id="tanggal" type="date" name="tanggal" class="form-control" required>
+                                    <input id="pkb" type="text" name="pkb" class="form-control" placeholder="Masukkan PKB" required>
                                 </div>
                                 <br>
                                 <br>

@@ -57,6 +57,7 @@ Route::prefix('pinjam')->group(function () {
     Route::get('/', function () { return view('page/pinjam'); });
     Route::get('/tampil', [PinjamController::class, 'pinjamtampil'])->name('pinjamtampil');
     Route::post('/tambah', [PinjamController::class, 'pinjamtambah'])->name('pinjamtambah');
+    Route::delete('/hapus/{pkb}', [PinjamController::class, 'pinjamhapus'])->name('pinjamhapus');
 });
 
 // Route to Request
