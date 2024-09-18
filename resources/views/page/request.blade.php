@@ -45,16 +45,24 @@
                                                 <td style="text-align: center">{{ $transaksi->barang->nama }}</td>
                                                 <td style="text-align: center">{{ $transaksi->jumlah }}</td>
                                                 <td style="text-align: center">
-                                                    <div style="display: flex; justify-content: center; align-items: center;">
-                                                        {{ ucfirst($transaksi->status) }} | 
-                                                        @if ($transaksi->status == 'diminta')
-                                                            <form action="{{ route('requestStatusChange', $transaksi->id_request) }}" method="POST" style="display:inline-block; margin-left: 10px;">
-                                                                @csrf
-                                                                @method('PUT')
-                                                                <input type="submit" class="btn btn-success" value="Selesai">
-                                                            </form>
-                                                        @endif
-                                                    </div>
+                                                    <form action="{{ route('requestStatusChange', $transaksi->id_request) }}" method="POST" style="display:inline-block;">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <select name="status" class="form-control status-select" required>
+                                                            <option value="diminta" {{ $transaksi->status == 'diminta' ? 'selected' : '' }}>Diminta</option>
+                                                            <option value="selesai" {{ $transaksi->status == 'selesai' ? 'selected' : '' }}>Selesai</option>
+                                                        </select>
+                                                    </form>
+
+                                                    <script>
+                                                        document.addEventListener('DOMContentLoaded', function () {
+                                                            document.querySelectorAll('.status-select').forEach(function (select) {
+                                                                select.addEventListener('change', function () {
+                                                                    this.closest('form').submit();
+                                                                });
+                                                            });
+                                                        });
+                                                    </script>
                                                 </td>
                                             </tr>
                                         @else
@@ -64,16 +72,24 @@
                                                 <td style="text-align: center">{{ $transaksi->barang->nama }}</td>
                                                 <td style="text-align: center">{{ $transaksi->jumlah }}</td>
                                                 <td style="text-align: center">
-                                                    <div style="display: flex; justify-content: center; align-items: center;">
-                                                        {{ ucfirst($transaksi->status) }} | 
-                                                        @if ($transaksi->status == 'diminta')
-                                                            <form action="{{ route('requestStatusChange', $transaksi->id_request) }}" method="POST" style="display:inline-block; margin-left: 10px;">
-                                                                @csrf
-                                                                @method('PUT')
-                                                                <input type="submit" class="btn btn-success" value="Selesai">
-                                                            </form>
-                                                        @endif
-                                                    </div>
+                                                    <form action="{{ route('requestStatusChange', $transaksi->id_request) }}" method="POST" style="display:inline-block;">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <select name="status" class="form-control status-select" required>
+                                                            <option value="diminta" {{ $transaksi->status == 'diminta' ? 'selected' : '' }}>Diminta</option>
+                                                            <option value="selesai" {{ $transaksi->status == 'selesai' ? 'selected' : '' }}>Selesai</option>
+                                                        </select>
+                                                    </form>
+
+                                                    <script>
+                                                        document.addEventListener('DOMContentLoaded', function () {
+                                                            document.querySelectorAll('.status-select').forEach(function (select) {
+                                                                select.addEventListener('change', function () {
+                                                                    this.closest('form').submit();
+                                                                });
+                                                            });
+                                                        });
+                                                    </script>
                                                 </td>
                                             </tr>
                                         @endif

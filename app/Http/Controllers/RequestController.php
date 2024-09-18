@@ -40,7 +40,7 @@ class RequestController extends Controller
 
     // mengubah status request
     public function requestStatusChange($id_request, Request $request){
-        dd($request->all());
+        // dd($request->all());
         $request->validate([
             'status' => 'required|in:diminta,selesai'
         ]);
