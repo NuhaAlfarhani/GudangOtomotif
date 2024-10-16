@@ -32,8 +32,7 @@ Route::prefix('stok')->group(function () {
 // Route to opname
 Route::prefix('opname')->group(function () {
     Route::get('/', [OpnameController::class, 'opnametampil'])->name('opnametampil');
-    Route::post('/calculate', [OpnameController::class, 'opnameCalculate'])->name('opnameCalculate');
-    Route::get('/export', [OpnameController::class, 'export'])->name('export');
+    Route::post('/export', [OpnameController::class, 'export'])->name('export');
 });
 
 // Route to barang masuk
@@ -42,7 +41,8 @@ Route::prefix('masuk')->group(function () {
     Route::get('/tampil', [MasukController::class, 'masuktampil'])->name('masuktampil');
     Route::post('/tambah', [MasukController::class, 'masuktambah'])->name('masuktambah');
     Route::delete('/hapus/{id_masuk}', [MasukController::class, 'masukhapus'])->name('masukhapus');
-    Route::post('/search', [MasukController::class, 'masuksearch'])->name('masuksearch');
+    Route::post('/searchbarang', [MasukController::class, 'masuksearch'])->name('masuksearch');
+    Route::get('/search', [MasukController::class, 'masukcari'])->name('masukcari');
 });
 
 // Route to barang keluar

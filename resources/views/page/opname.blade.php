@@ -9,22 +9,18 @@
                         Storage Opname
                     </h2>
 
-                    <div class="card-header">
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalDataTambah">
-                            Tambah Barang
-                        </button>
-                        
-                        <form action="{{ route('export') }}" method="GET" class="d-inline">
-                            @csrf
-                            <input type="hidden" name="data" value="{{ json_encode($barang->items()) }}">
-                            <button type="submit" class="btn btn-info">Export Data</button>
-                        </form>
+                    <div class="card-header"> 
+                    <form id="exportForm" action="{{ route('export') }}" method="POST" class="d-inline">
+                        @csrf
+                        <input type="hidden" name="barang" id="barangData">
+                        <button type="submit" class="btn btn-info">Export Data</button>
+                    </form>
                     </div>
                 </div>
                 
                 <div class="card-body">
                     <div class="card mb-4">
-                        <div class="search">
+                        <!-- <div class="search">
                             <form action="{{ route('cari') }}" method="GET" class="form-inline">
                                 <div class="input-group">
                                     <input type="text" name="cari" class="form-control" placeholder="Cari Barang..." aria-label="Cari" aria-describedby="button-search">
@@ -33,7 +29,7 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>
+                        </div> -->
 
                         <div class="table-responsive">
                             <form action="{{ route('opnameCalculate') }}" method="POST">
@@ -65,16 +61,12 @@
                                                 <td style="text-align: center">{{ $brg->deskripsi }}</td>
                                                 <td style="text-align: center">{{ $brg->kendaraan }}</td>
                                                 <td style="text-align: center" class="selisih">
-                                                    @if($brg->selisih !== null)
-                                                        {{ $brg->selisih }}
-                                                    @endif
+                                                    <span>{{ $brg->stok - $brg->stok_sistem }}</span>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-
-                                <button type="submit" class="btn btn-primary" style="margin-bottom: 2rem;">Hitung Selisih</button>
                             </form>
 
                             <nav aria-label="Page navigation">
@@ -107,4 +99,49 @@
             </div>
         </main>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const stokSistemInputs = document.querySelectorAll('.stok-sistem');
+
+            stokSistemInputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    const stokFisik = parseFloat(this.dataset.stokFisik);
+                    const stokSistem = parseFloat(this.value);
+                    const selisihElement = this.closest('tr').querySelector('.selisih span');
+
+                    if (!isNaN(stokFisik) && !isNaN(stokSistem)) {
+                        selisihElement.textContent = stokFisik - stokSistem;
+                    } else {
+                        selisihElement.textContent = '';
+                    }
+                });
+            });
+
+            document.getElementById('exportForm').addEventListener('submit', function(event) {
+                const barangData = [];
+                document.querySelectorAll('tbody tr').forEach(row => {
+                    const id_barang = row.querySelector('td:nth-child(2)').textContent.trim();
+                    const nama = row.querySelector('td:nth-child(3)').textContent.trim();
+                    const stok = parseFloat(row.querySelector('td:nth-child(4)').textContent.trim());
+                    const stok_sistem = parseFloat(row.querySelector('input.stok-sistem').value.trim());
+                    const deskripsi = row.querySelector('td:nth-child(6)').textContent.trim();
+                    const kendaraan = row.querySelector('td:nth-child(7)').textContent.trim();
+                    const selisih = stok - stok_sistem;
+
+                    barangData.push({
+                        id_barang,
+                        nama,
+                        stok,
+                        stok_sistem,
+                        deskripsi,
+                        kendaraan,
+                        selisih
+                    });
+                });
+
+                document.getElementById('barangData').value = JSON.stringify(barangData);
+            });
+        });
+    </script>
 @endsection

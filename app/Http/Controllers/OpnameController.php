@@ -32,22 +32,6 @@ class OpnameController extends Controller
         return view('page/opname', ['barang' => $databarang]);
     }
 
-    public function opnameCalculate(Request $request)
-    {
-        $stokSistem = $request->input('stok_sistem', []);
-        $barang = BarangModel::all();
-
-        foreach ($barang as $brg) {
-            if (isset($stokSistem[$brg->id_barang])) {
-                $brg->stok_sistem = $stokSistem[$brg->id_barang];
-                $brg->selisih = $brg->stok - $brg->stok_sistem;
-                $brg->save();
-            }
-        }
-
-        return redirect()->route('opnametampil');
-    }
-
     public function paginate(Request $request)
     {
         $request->validate([
@@ -61,46 +45,39 @@ class OpnameController extends Controller
     
     public function export(Request $request)
     {
-        $data = $request->input('data');
-        if (!$data) {
-            return back()->withErrors(['data' => 'No data provided for export.']);
-        }
-
-        $barang = json_decode($data, true);
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            return back()->withErrors(['data' => 'Invalid data format.']);
-        }
+        $barangData = json_decode($request->input('barang'), true);
 
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
-        // Set the column headings
+        // Set the header row
         $sheet->setCellValue('A1', 'Nomor');
         $sheet->setCellValue('B1', 'Kode Barang');
         $sheet->setCellValue('C1', 'Nama Barang');
-        $sheet->setCellValue('D1', 'Quantity Stock');
-        $sheet->setCellValue('E1', 'Deskripsi Lokasi');
-        $sheet->setCellValue('F1', 'Jenis Kendaraan');
+        $sheet->setCellValue('D1', 'Stock Fisik');
+        $sheet->setCellValue('E1', 'Stock Sistem');
+        $sheet->setCellValue('F1', 'Deskripsi Lokasi');
+        $sheet->setCellValue('G1', 'Jenis Kendaraan');
+        $sheet->setCellValue('H1', 'Selisih');
 
-        // Populate the data
+        // Populate the data rows
         $row = 2;
-        foreach ($barang as $index => $brg) {
+        foreach ($barangData as $index => $brg) {
             $sheet->setCellValue('A' . $row, $index + 1);
             $sheet->setCellValue('B' . $row, $brg['id_barang']);
             $sheet->setCellValue('C' . $row, $brg['nama']);
             $sheet->setCellValue('D' . $row, $brg['stok']);
-            $sheet->setCellValue('E' . $row, $brg['deskripsi']);
-            $sheet->setCellValue('F' . $row, $brg['kendaraan']);
+            $sheet->setCellValue('E' . $row, $brg['stok_sistem']);
+            $sheet->setCellValue('F' . $row, $brg['deskripsi']);
+            $sheet->setCellValue('G' . $row, $brg['kendaraan']);
+            $sheet->setCellValue('H' . $row, $brg['stok'] - $brg['stok_sistem']);
             $row++;
         }
 
         $writer = new Xlsx($spreadsheet);
-        $fileName = 'Opname_' . date('Y-m-d') . '.xlsx';
+        $fileName = 'barang.xlsx';
         $temp_file = tempnam(sys_get_temp_dir(), $fileName);
         $writer->save($temp_file);
-
-        // Delete the data after downloading the file
-        $request->session()->forget('data');
 
         return response()->download($temp_file, $fileName)->deleteFileAfterSend(true);
     }
