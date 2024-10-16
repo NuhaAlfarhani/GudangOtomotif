@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\MasukModel;
 use App\Models\BarangModel;
-use Carbon\Carbon;
 
 class MasukController extends Controller
 {
@@ -23,16 +22,13 @@ class MasukController extends Controller
         $request->validate([
             'id_barang' => 'required',
             'jumlah' => 'required',
-            'tanggal' => 'required|date_format:d / m / Y H:i'
+            'PKB' => 'required'
         ]);
-
-        // Convert the date format
-        $tanggal = Carbon::createFromFormat('d / m / Y H:i', $request->tanggal, 'Asia/Jakarta')->setTimezone('UTC')->format('Y-m-d H:i:s');
         
         MasukModel::create([
             'id_barang' => $request->id_barang,
             'jumlah' => $request->jumlah,
-            'tanggal' => $tanggal
+            'PKB' => $request->PKB,
         ]);
 
         BarangModel::where('id_barang', $request->id_barang)->increment('stok', $request->jumlah);
@@ -50,6 +46,13 @@ class MasukController extends Controller
         $masuk->delete();
 
         return back()->with('success', 'Data berhasil dihapus');
+    }
+
+    // search
+    public function masuksearch(Request $request){
+        $search = $request->input('search');
+        $datamasuk = (new MasukModel)->search($search, $request->all())->get();
+        return response()->json($datamasuk);
     }
     
 }

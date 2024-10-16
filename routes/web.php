@@ -42,6 +42,7 @@ Route::prefix('masuk')->group(function () {
     Route::get('/tampil', [MasukController::class, 'masuktampil'])->name('masuktampil');
     Route::post('/tambah', [MasukController::class, 'masuktambah'])->name('masuktambah');
     Route::delete('/hapus/{id_masuk}', [MasukController::class, 'masukhapus'])->name('masukhapus');
+    Route::post('/search', [MasukController::class, 'masuksearch'])->name('masuksearch');
 });
 
 // Route to barang keluar

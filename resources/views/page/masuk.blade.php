@@ -44,6 +44,7 @@
                                         <td style="text-align: center">Nama Barang</td>
                                         <td style="text-align: center">Jumlah</td>
                                         <td style="text-align: center">Jenis Kendaraan</td>
+                                        <td style="text-align: center">PKB</td>
                                         <td style="text-align: center">Tanggal</td>
                                         <td style="text-align: center">Aksi</td>
                                     </tr>
@@ -58,6 +59,7 @@
                                                 <td style="text-align: center">{{ $transaksi->barang->nama }}</td>
                                                 <td style="text-align: center">{{ $transaksi->jumlah }}</td>
                                                 <td style="text-align: center">{{ $transaksi->barang->kendaraan }}</td>
+                                                <td style="text-align: center">{{ $transaksi->PKB }}</td>
                                                 <td style="text-align: center">{{ $transaksi->created_at->format('d / m / Y H:i') }}</td>
                                                 <td style="text-align: center">
                                                 <div class="d-flex justify-content-center">
@@ -76,6 +78,7 @@
                                                 <td style="text-align: center">{{ $transaksi->barang->nama }}</td>
                                                 <td style="text-align: center">{{ $transaksi->jumlah }}</td>
                                                 <td style="text-align: center">{{ $transaksi->barang->kendaraan }}</td>
+                                                <td style="text-align: center">{{ $transaksi->PKB }}</td>
                                                 <td style="text-align: center">{{ $transaksi->created_at->format('d / m / Y H:i') }}</td>
                                                 <td style="text-align: center">
                                                     <div class="d-flex justify-content-center">
@@ -145,12 +148,7 @@
                                     Nama Barang
                                 </label>
                                 <div class="col-md-6">
-                                    <select type="text" id="id_barang" name="id_barang" class="form-control" placeholder="Pilih Barang" required>
-                                        <option value="">Pilih Barang</option>
-                                        @foreach ($barang as $barang)
-                                            <option value="{{ $barang->id_barang }}">{{ $barang->nama }}</option>
-                                        @endforeach
-                                    </select>
+                                    <input id="id_barang" name="id_barang" type="text" class="form-control" placeholder="Pilih Barang" value="{{ $search ?? '' }}" autocomplete="none" required>
                                 </div>
                                 <br>
                                 <br>
@@ -159,6 +157,14 @@
                                 </label>
                                 <div class="col-md-6">
                                     <input id="jumlah" type="number" name="jumlah" class="form-control" placeholder="Masukkan Jumlah Barang" required>
+                                </div>
+                                <br>
+                                <br>
+                                <label for="PKB" class="col-sm-4 col-form-label text-md-right">
+                                    PKB
+                                </label>
+                                <div class="col-md-6">
+                                    <input id="PKB" type="text" name="PKB" class="form-control" placeholder="Masukkan PKB" required>
                                 </div>
                                 <br>
                                 <br>
@@ -185,4 +191,27 @@
             </div>   
         </div>
     </div>
+
+    <script>
+        const searchInput = document.getElementById('id_barang');
+        const tableBody = document.querySelector('tbody');
+
+        searchInput.addEventListener('input', function() {
+            const search = this.value;
+
+            fetch(`{{ route('masuksearch') }}?search=${search}`)
+                .then(response => response.json())
+                .then(data => {
+                    tableBody.innerHTML = '';
+                    data.forEach(barang => {
+                        tableBody.innerHTML += `
+                            <tr>
+                                <td style="text-align: center">${barang.id_barang}</td>
+                                <td style="text-align: center">${barang.nama}</td>
+                            </tr>
+                        `;
+                    });
+                });
+        });
+    </script>
 @endsection

@@ -16,11 +16,19 @@ class MasukModel extends Model
     protected $fillable = [
         'id_barang',
         'jumlah',
-        'tanggal'
+        'PKB'
     ];
 
     public function barang()
     {
         return $this->belongsTo(BarangModel::class, 'id_barang', 'id_barang');
+    }
+    
+    public function search($query, $search)
+    {
+        return $query->join('barang', 'masuk.id_barang', '=', 'barang.id_barang')
+            ->where('masuk.id_barang', 'like', '%' . $search . '%')
+            ->orWhere('barang.nama_barang', 'like', '%' . $search . '%')
+            ->select('masuk.*'); // Ensure only columns from 'masuk' are selected
     }
 }
