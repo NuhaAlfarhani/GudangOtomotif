@@ -25,7 +25,7 @@
                 <div class="card-body">
                     <div class="card mb-4">
                         <div class="search">
-                            <form action="{{ route('cari') }}" method="GET" class="form-inline">
+                            <form action="{{ route('masukcari') }}" method="GET" class="form-inline">
                                 <div class="input-group">
                                     <input type="text" name="cari" class="form-control" placeholder="Cari Barang..." aria-label="Cari" aria-describedby="button-search">
                                     <div class="input-group-append">
@@ -148,35 +148,44 @@
                                     Nama Barang
                                 </label>
                                 <div class="col-md-6">
-                                    <input id="id_barang" name="id_barang" type="text" class="form-control" placeholder="Pilih Barang" value="{{ $search ?? '' }}" autocomplete="none" required>
+                                    <!-- Span to show typed letters -->
+                                    <span id="typedText" style="display: block; font-weight: bold;"></span>
+                                    
+                                    <!-- Select element -->
+                                    <select id="id_barang" name="id_barang" class="form-control" required>
+                                        <option value="" disabled selected></option>
+                                        @foreach($barangList as $barang)
+                                            <option value="{{ $barang->id_barang }}">{{ $barang->nama }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <br>
-                                <br>
+                            </div> <!-- Close the form group div -->
+                            <div class="form-group row">
                                 <label for="jumlah" class="col-sm-4 col-form-label text-md-right">
                                     Jumlah
                                 </label>
                                 <div class="col-md-6">
                                     <input id="jumlah" type="number" name="jumlah" class="form-control" placeholder="Masukkan Jumlah Barang" required>
                                 </div>
-                                <br>
-                                <br>
+                            </div>
+                            <div class="form-group row">
                                 <label for="PKB" class="col-sm-4 col-form-label text-md-right">
                                     PKB
                                 </label>
                                 <div class="col-md-6">
                                     <input id="PKB" type="text" name="PKB" class="form-control" placeholder="Masukkan PKB" required>
                                 </div>
-                                <br>
-                                <br>
+                            </div>
+                            <div class="form-group row">
                                 <label for="tanggal" class="col-sm-4 col-form-label text-md-right">
                                     Tanggal
                                 </label>
                                 <div class="col-md-6">
                                     <input id="tanggal" type="text" name="tanggal" class="form-control" value="{{ \Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->format('d / m / Y H:i') }}" readonly>
                                 </div>
-                                <br>
-                                <br>
-                                <div class="form-button">
+                            </div>
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-success">
                                         Simpan Data
                                     </button>
@@ -184,7 +193,7 @@
                                         Batal
                                     </button>
                                 </div>
-                            </div> 
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -192,26 +201,29 @@
         </div>
     </div>
 
-    <script>
-        const searchInput = document.getElementById('id_barang');
-        const tableBody = document.querySelector('tbody');
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
+                // Initialize Select2 for the Nama Barang dropdown
+                $('#id_barang').select2({
+                    placeholder: 'Pilih Barang',
+                    allowClear: true,
+                    minimumInputLength: 1,
+                    width: '100%',
+                });
 
-        searchInput.addEventListener('input', function() {
-            const search = this.value;
+                // Listen for input in the Select2 search field
+                $('#id_barang').on('select2:open', function() {
+                    // Select the search box created by Select2
+                    let searchBox = $('.select2-search__field');
 
-            fetch(`{{ route('masuksearch') }}?search=${search}`)
-                .then(response => response.json())
-                .then(data => {
-                    tableBody.innerHTML = '';
-                    data.forEach(barang => {
-                        tableBody.innerHTML += `
-                            <tr>
-                                <td style="text-align: center">${barang.id_barang}</td>
-                                <td style="text-align: center">${barang.nama}</td>
-                            </tr>
-                        `;
+                    // Capture input as user types
+                    searchBox.on('input', function() {
+                        // Update the span with the typed text
+                        $('#typedText').text($(this).val());
                     });
                 });
-        });
-    </script>
+            });
+        </script>
+    @endpush
 @endsection

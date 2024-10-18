@@ -13,8 +13,9 @@ class MasukController extends Controller
         $perPage = session('perPage', 10);
         $datamasuk = MasukModel::paginate($perPage);
         $databarang = BarangModel::all();
+        $barangList = BarangModel::all();
 
-        return view('page/masuk', ['masuk' => $datamasuk, 'barang' => $databarang]);
+        return view('page/masuk', ['masuk' => $datamasuk, 'barang' => $databarang], compact('barangList'));
     }
 
     //menambah data masuk
@@ -48,11 +49,15 @@ class MasukController extends Controller
         return back()->with('success', 'Data berhasil dihapus');
     }
 
-    // search
-    public function masuksearch(Request $request){
-        $search = $request->input('search');
-        $datamasuk = (new MasukModel)->search($search, $request->all())->get();
-        return response()->json($datamasuk);
+    //search data barang masuk
+    public function masukcari(Request $request){
+        
+        $cari = $request->input('cari');
+        $masuk = BarangModel::Where('barang', function($query) use ($cari) {
+            $query->where('nama', 'LIKE', "%{$cari}%");
+        })
+        ->paginate(10);
+        
+        return view('page/masuk', compact('barang'));
     }
-    
 }
