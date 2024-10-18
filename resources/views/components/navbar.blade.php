@@ -6,8 +6,6 @@
         <img src="{{ asset('assets')}}/images/ZETA_logo.png" style="width: 50px; height: 50px;">
     </a>
     
-    
-    
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
