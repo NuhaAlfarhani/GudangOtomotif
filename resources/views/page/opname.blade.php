@@ -20,54 +20,40 @@
                 
                 <div class="card-body">
                     <div class="card mb-4">
-                        <!-- <div class="search">
-                            <form action="{{ route('cari') }}" method="GET" class="form-inline">
-                                <div class="input-group">
-                                    <input type="text" name="cari" class="form-control" placeholder="Cari Barang..." aria-label="Cari" aria-describedby="button-search">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="submit" id="button-search">Cari</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div> -->
-
                         <div class="table-responsive">
-                            <form action="{{ route('opnameCalculate') }}" method="POST">
-                                @csrf
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th style="text-align: center">Nomor</th>
-                                            <th style="text-align: center">Kode Barang</th>
-                                            <th style="text-align: center">Nama Barang</th>
-                                            <th style="text-align: center">Stock Fisik</th>
-                                            <th style="text-align: center">Stock Sistem</th>
-                                            <th style="text-align: center">Deskripsi Lokasi</th>
-                                            <th style="text-align: center">Jenis Kendaraan</th>
-                                            <th style="text-align: center">Selisih</th>
-                                        </tr>
-                                    </thead>
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center">Nomor</th>
+                                        <th style="text-align: center">Kode Barang</th>
+                                        <th style="text-align: center">Nama Barang</th>
+                                        <th style="text-align: center">Stock Fisik</th>
+                                        <th style="text-align: center">Stock Sistem</th>
+                                        <th style="text-align: center">Deskripsi Lokasi</th>
+                                        <th style="text-align: center">Jenis Kendaraan</th>
+                                        <th style="text-align: center">Selisih</th>
+                                    </tr>
+                                </thead>
 
-                                    <tbody>
-                                        @foreach ($barang as $brg)
-                                            <tr>
-                                                <td style="text-align: center">{{ $loop->iteration }}</td>
-                                                <td style="text-align: center">{{ $brg->id_barang }}</td>
-                                                <td style="text-align: center">{{ $brg->nama }}</td>
-                                                <td style="text-align: center">{{ $brg->stok }}</td>
-                                                <td style="text-align: center; width: 10rem">
-                                                    <input type="number" name="stok_sistem[{{ $brg->id_barang }}]" class="form-control stok-sistem" data-stok-fisik="{{ $brg->stok }}" value="{{ $brg->stok_sistem }}" style="width: 100%; height: 100%; text-align:center">
-                                                </td>
-                                                <td style="text-align: center">{{ $brg->deskripsi }}</td>
-                                                <td style="text-align: center">{{ $brg->kendaraan }}</td>
-                                                <td style="text-align: center" class="selisih">
-                                                    <span>{{ $brg->stok - $brg->stok_sistem }}</span>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </form>
+                                <tbody>
+                                    @foreach ($barang as $brg)
+                                        <tr>
+                                            <td style="text-align: center">{{ $loop->iteration }}</td>
+                                            <td style="text-align: center">{{ $brg->id_barang }}</td>
+                                            <td style="text-align: center">{{ $brg->nama }}</td>
+                                            <td style="text-align: center">{{ $brg->stok }}</td>
+                                            <td style="text-align: center; width: 10rem">
+                                                <input type="number" name="stok_sistem[{{ $brg->id_barang }}]" class="form-control stok-sistem" data-stok-fisik="{{ $brg->stok }}" value="{{ $brg->stok_sistem }}" style="width: 100%; height: 100%; text-align:center">
+                                            </td>
+                                            <td style="text-align: center">{{ $brg->deskripsi }}</td>
+                                            <td style="text-align: center">{{ $brg->kendaraan }}</td>
+                                            <td style="text-align: center" class="selisih">
+                                                <span>{{ $brg->stok - $brg->stok_sistem }}</span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
 
                             <nav aria-label="Page navigation">
                                 <ul class="pagination">
