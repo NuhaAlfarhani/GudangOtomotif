@@ -16,6 +16,7 @@ return new class extends Migration
             $table->uuid('id_barang')->nullable();
             $table->foreign('id_barang')->references('id_barang')->on('barang')->onDelete('cascade');
             $table->integer('jumlah');
+            $table->string('PKB');
             $table->date('tanggal');
             $table->timestamps();
         });

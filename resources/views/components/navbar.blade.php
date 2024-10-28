@@ -1,6 +1,6 @@
 
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-light">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href="/home">
         ZETA
 
         <img src="{{ asset('assets')}}/images/ZETA_logo.png" style="width: 50px; height: 50px;">
