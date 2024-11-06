@@ -21,18 +21,15 @@ class KeluarController extends Controller
     //menambah data keluar
     public function keluartambah(Request $request){
         $request->validate([
+            'PKB' => 'required',
             'id_barang' => 'required',
-            'jumlah' => 'required',
-            'tanggal' => 'required|date_format:d / m / Y H:i'
+            'jumlah' => 'required'
         ]);
 
-        // Convert the date format
-        $tanggal = Carbon::createFromFormat('d / m / Y H:i', $request->tanggal, 'Asia/Jakarta')->setTimezone('UTC')->format('Y-m-d H:i:s');
-
         KeluarModel::create([
+            'PKB' => $request->PKB,
             'id_barang' => $request->id_barang,
-            'jumlah' => $request->jumlah,
-            'tanggal' => $tanggal
+            'jumlah' => $request->jumlah
         ]);
 
         BarangModel::where('id_barang', $request->id_barang)->decrement('stok', $request->jumlah);
@@ -50,5 +47,21 @@ class KeluarController extends Controller
         $keluar->delete();
 
         return back()->with('success', 'Data berhasil dihapus');
+    }
+
+    //search data barang keluar
+    public function keluarcari(Request $request)
+    {
+        $cari = $request->input('keluarcari');
+        $databarang = BarangModel::all();
+        $keluar = KeluarModel::whereHas('barang', function($query) use ($cari) {
+                $query->where('nama', 'LIKE', "%{$cari}%")
+                      ->orWhere('id_barang', 'LIKE', "%{$cari}%");
+            })
+            ->orWhere('PKB', 'LIKE', "%{$cari}%")
+            ->paginate(10);
+        // dd($keluar);
+
+        return view('page/keluar', compact('keluar'), ['barang' => $databarang]);
     }
 }

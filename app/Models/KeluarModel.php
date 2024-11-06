@@ -14,9 +14,9 @@ class KeluarModel extends Model
     protected $primaryKey = 'id_keluar';
 
     protected $fillable = [
+        'PKB',
         'id_barang',
-        'jumlah',
-        'tanggal'
+        'jumlah'
     ];
 
     public function barang()
