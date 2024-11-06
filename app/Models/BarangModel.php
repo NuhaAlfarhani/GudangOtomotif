@@ -20,4 +20,9 @@ class BarangModel extends Model
         'deskripsi',
         'kendaraan'
     ];
+
+    public function masuk()
+    {
+        return $this->hasMany(MasukModel::class, 'id_barang', 'id_barang');
+    }                           
 }

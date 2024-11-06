@@ -29,7 +29,6 @@ class MasukController extends Controller
         MasukModel::create([
             'id_barang' => $request->id_barang,
             'jumlah' => $request->jumlah,
-            'PKB' => $request->PKB,
         ]);
 
         BarangModel::where('id_barang', $request->id_barang)->increment('stok', $request->jumlah);
@@ -50,14 +49,24 @@ class MasukController extends Controller
     }
 
     //search data barang masuk
-    public function masukcari(Request $request){
+    public function masukcari(Request $request)
+    {
+        $cari = $request->input('masukcari');
         
-        $cari = $request->input('cari');
-        $masuk = BarangModel::Where('barang', function($query) use ($cari) {
-            $query->where('nama', 'LIKE', "%{$cari}%");
-        })
-        ->paginate(10);
-        
-        return view('page/masuk', compact('barang'));
+        $masuk = MasukModel::whereHas('barang', function($query) use ($cari) {
+                $query->where('nama', 'LIKE', "%{$cari}%")
+                      ->orWhere('id_barang', 'LIKE', "%{$cari}%");
+            })
+            ->paginate(10);
+
+        return view('page/masuk', compact('masuk'));
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $masuk = MasukModel::where('name', 'like', '%' . $search . '%')
+        ->get();
+        return response()->json($masuk);
     }
 }

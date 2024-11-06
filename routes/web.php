@@ -56,6 +56,7 @@ Route::group(['middleware'=>'auth'],function () {
         Route::get('/tampil', [KeluarController::class, 'keluartampil'])->name('keluartampil');
         Route::post('/tambah', [KeluarController::class, 'keluartambah'])->name('keluartambah');
         Route::delete('/hapus/{id_keluar}', [KeluarController::class, 'keluarhapus'])->name('keluarhapus');
+        Route::get('/cari', [KeluarController::class, 'keluarcari'])->name('keluarcari');
     });
 
     // Route to Pinjam
