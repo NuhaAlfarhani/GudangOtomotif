@@ -22,8 +22,7 @@ class MasukController extends Controller
     public function masuktambah(Request $request){
         $request->validate([
             'id_barang' => 'required',
-            'jumlah' => 'required',
-            'PKB' => 'required'
+            'jumlah' => 'required'
         ]);
         
         MasukModel::create([
@@ -52,14 +51,14 @@ class MasukController extends Controller
     public function masukcari(Request $request)
     {
         $cari = $request->input('masukcari');
-        
+        $databarang = BarangModel::all();
         $masuk = MasukModel::whereHas('barang', function($query) use ($cari) {
                 $query->where('nama', 'LIKE', "%{$cari}%")
                       ->orWhere('id_barang', 'LIKE', "%{$cari}%");
             })
             ->paginate(10);
 
-        return view('page/masuk', compact('masuk'));
+        return view('page/masuk', compact('masuk'), ['barang' => $databarang]);
     }
 
     public function search(Request $request)

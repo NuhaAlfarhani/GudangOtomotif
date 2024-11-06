@@ -145,8 +145,12 @@
                                     Nama Barang
                                 </label>
                                 <div class="col-md-6">
-                                    <input id="id_barang" type="text" name="id_barang" class="form-control" placeholder="Masukkan Nama Barang" required
-                                    value="{{ $search ?? '' }}" autocomplete="none">
+                                    <select id="id_barang" name="id_barang" class="form-control" required>
+                                        <option value="">Pilih Barang</option>
+                                        @foreach ($barang as $item)
+                                            <option value="{{ $item->id_barang }}">{{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <br>
                                 <br>
