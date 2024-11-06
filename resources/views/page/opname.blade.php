@@ -10,11 +10,11 @@
                     </h2>
 
                     <div class="card-header"> 
-                    <form id="exportForm" action="{{ route('export') }}" method="POST" class="d-inline">
-                        @csrf
-                        <input type="hidden" name="barang" id="barangData">
-                        <button type="submit" class="btn btn-info">Export Data</button>
-                    </form>
+                        <form id="exportForm" action="{{ route('opnameexport') }}" method="POST" class="d-inline">
+                            @csrf
+                            <input type="hidden" name="opnameexport" id="barangData">
+                            <button type="submit" class="btn btn-info">Export Data</button>
+                        </form>
                     </div>
                 </div>
                 
@@ -102,31 +102,6 @@
                         selisihElement.textContent = '';
                     }
                 });
-            });
-
-            document.getElementById('exportForm').addEventListener('submit', function(event) {
-                const barangData = [];
-                document.querySelectorAll('tbody tr').forEach(row => {
-                    const id_barang = row.querySelector('td:nth-child(2)').textContent.trim();
-                    const nama = row.querySelector('td:nth-child(3)').textContent.trim();
-                    const stok = parseFloat(row.querySelector('td:nth-child(4)').textContent.trim());
-                    const stok_sistem = parseFloat(row.querySelector('input.stok-sistem').value.trim());
-                    const deskripsi = row.querySelector('td:nth-child(6)').textContent.trim();
-                    const kendaraan = row.querySelector('td:nth-child(7)').textContent.trim();
-                    const selisih = stok - stok_sistem;
-
-                    barangData.push({
-                        id_barang,
-                        nama,
-                        stok,
-                        stok_sistem,
-                        deskripsi,
-                        kendaraan,
-                        selisih
-                    });
-                });
-
-                document.getElementById('barangData').value = JSON.stringify(barangData);
             });
         });
     </script>

@@ -45,7 +45,7 @@ class OpnameController extends Controller
     
     public function export(Request $request)
     {
-        $barangData = json_decode($request->input('barang'), true);
+        $barangData = json_decode($request->input('opnameexport'), true);
 
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
@@ -75,7 +75,7 @@ class OpnameController extends Controller
         }
 
         $writer = new Xlsx($spreadsheet);
-        $fileName = 'barang.xlsx';
+        $fileName = 'Opname_' . date('d-m-Y') . '.xlsx';
         $temp_file = tempnam(sys_get_temp_dir(), $fileName);
         $writer->save($temp_file);
 
