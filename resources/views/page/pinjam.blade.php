@@ -39,20 +39,41 @@
 
                                 <tbody>
                                     @foreach ($pinjam as $transaksi)
-                                        <tr>
-                                            <td style="text-align: center">{{ $loop->iteration }}</td>
-                                            <td style="text-align: center">{{ $transaksi->pkb }}</td>
-                                            <td style="text-align: center">{{ $transaksi->created_at }}</td>
-                                            <td style="text-align: center">{{ $transaksi->daftar_barang }}</td>
-                                            <td style="text-align: center">{{ $transaksi->alasan }}</td>
-                                            <td style="text-align: center">
-                                                <form action="/pinjam/hapus/{{ $transaksi->pkb }}" method="POST" style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">Hapus</button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                        @if($loop->iteration % 2 == 0)
+                                            <tr>
+                                                <td style="text-align: center">{{ $loop->iteration }}</td>
+                                                <td style="text-align: center">{{ $transaksi->pkb }}</td>
+                                                <td style="text-align: center">{{ $transaksi->created_at->format('d / m / Y H:i') }}</td>
+                                                <td style="text-align: center">{{ $transaksi->daftar_barang }}</td>
+                                                <td style="text-align: center">{{ $transaksi->alasan }}</td>
+                                                <td style="text-align: center"></td>
+                                                    <div class="d-flex justify-content-center">
+                                                        <form action="/pinjam/hapus/{{ $transaksi->pkb }}" method="POST" onsubmit="return confirmDelete()">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @else
+                                            <tr style="background-color:#34374C">
+                                                <td style="text-align: center">{{ $loop->iteration }}</td>
+                                                <td style="text-align: center">{{ $transaksi->pkb }}</td>
+                                                <td style="text-align: center">{{ $transaksi->created_at->format('d / m / Y H:i') }}</td>
+                                                <td style="text-align: center">{{ $transaksi->daftar_barang }}</td>
+                                                <td style="text-align: center">{{ $transaksi->alasan }}</td>
+                                                <td style="text-align: center">
+                                                    <div class="d-flex justify-content-center">
+                                                        <form action="/pinjam/hapus/{{ $transaksi->pkb }}" method="POST" onsubmit="return confirmDelete()">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>

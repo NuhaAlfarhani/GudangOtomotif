@@ -74,8 +74,16 @@ Route::group(['middleware'=>'auth'],function () {
         Route::get('/tampil', [RequestController::class, 'requesttampil'])->name('requesttampil');
         Route::post('/tambah', [RequestController::class, 'requesttambah'])->name('requesttambah');
         Route::put('/status/{id}', [RequestController::class, 'requestStatusChange'])->name('requestStatusChange');
-        // Route::get('/edit/{id}', [RequestController::class, 'requestedit']);
-        // Route::get('/hapus/{id}', [RequestController::class, 'requesthapus']);
+    });
+
+    // Route to help
+    Route::get('/help', function () {
+        return view('page/help');
+    });
+
+    // Route to about
+    Route::get('/about', function () {
+        return view('page/about');
     });
 });
 
