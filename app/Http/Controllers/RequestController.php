@@ -6,23 +6,20 @@ use Illuminate\Http\Request;
 
 use App\Models\RequestModel;
 
-use App\Models\BarangModel;
-
 class RequestController extends Controller
 {
     // menampilkan data request
     public function requesttampil(){
         $datarequest = RequestModel::paginate(10);
-        $databarang = BarangModel::all();
 
-        return view('page/request', ['request' => $datarequest, 'barang' => $databarang]);
+        return view('page/request', ['request' => $datarequest]);
     }
 
     // menambah data request
     public function requesttambah(Request $request){
         // dd($request->all());
         $request->validate([
-            'id_barang' => 'required',
+            'nama_request' => 'required',
             'jumlah' => 'required|integer',
             'status' => 'nullable|in:diminta,selesai'
         ]);
@@ -30,7 +27,7 @@ class RequestController extends Controller
         $status = $request->status ?? 'diminta';
 
         RequestModel::create([
-            'id_barang' => $request->id_barang,
+            'nama_request' => $request->nama_request,
             'jumlah' => $request->jumlah,
             'status' => $status
         ]);

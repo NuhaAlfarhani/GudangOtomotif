@@ -29,7 +29,6 @@
                                 <thead>
                                     <tr>
                                         <td style="text-align: center">Nomor</td>
-                                        <td style="text-align: center">Kode Barang</td>
                                         <td style="text-align: center">Nama Barang</td>
                                         <td style="text-align: center">Jumlah</td>
                                         <td style="text-align: center">Status</td>
@@ -41,8 +40,7 @@
                                         @if ($loop->iteration % 2 == 0)
                                             <tr>
                                                 <td style="text-align: center">{{ $loop->iteration }}</td>
-                                                <td style="text-align: center">{{ $transaksi->barang->id_barang }}</td>
-                                                <td style="text-align: center">{{ $transaksi->barang->nama }}</td>
+                                                <td style="text-align: center">{{ $transaksi->nama_request }}</td>
                                                 <td style="text-align: center">{{ $transaksi->jumlah }}</td>
                                                 <td style="text-align: center">
                                                     <form action="{{ route('requestStatusChange', $transaksi->id_request) }}" method="POST" style="display:inline-block;">
@@ -68,8 +66,7 @@
                                         @else
                                             <tr style="background-color:#34374C">
                                                 <td style="text-align: center">{{ $loop->iteration }}</td>
-                                                <td style="text-align: center">{{ $transaksi->barang->id_barang }}</td>
-                                                <td style="text-align: center">{{ $transaksi->barang->nama }}</td>
+                                                <td style="text-align: center">{{ $transaksi->nama_request }}</td>
                                                 <td style="text-align: center">{{ $transaksi->jumlah }}</td>
                                                 <td style="text-align: center">
                                                     <form action="{{ route('requestStatusChange', $transaksi->id_request) }}" method="POST" style="display:inline-block;">
@@ -120,11 +117,7 @@
                                     Nama Barang
                                 </label>
                                 <div class="col-md-6">
-                                    <select id="id_barang" name="id_barang" class="form-control" placeholder="Pilih Barang" required>
-                                        <option value="">Pilih Barang</option>
-                                        @foreach ($barang as $barang)
-                                            <option value="{{ $barang->id_barang }}">{{ $barang->nama }}</option>
-                                        @endforeach
+                                    <input id="nama_request" type="text" name="nama_request" class="form-control" placeholder="Masukkan Nama Barang" required>
                                 </div>
                                 <br>
                                 <br>

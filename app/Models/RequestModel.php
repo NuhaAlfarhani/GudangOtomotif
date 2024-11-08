@@ -14,7 +14,7 @@ class RequestModel extends Model
     protected $primaryKey = 'id_request';
 
     protected $fillable = [
-        'id_barang',
+        'nama_request',
         'jumlah',
         'status'
     ];
