@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 use App\Models\BarangModel;
 
@@ -96,5 +98,41 @@ class BarangController extends Controller
         $barang->delete();
 
         return back()->with('success', 'Data berhasil dihapus');
+    }
+
+    // export data barang
+    public function barangexport(Request $request)
+    {
+        $barangData = BarangModel::all();
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Set the header row
+        $sheet->setCellValue('A1', 'Nomor');
+        $sheet->setCellValue('B1', 'Kode Barang');
+        $sheet->setCellValue('C1', 'Nama Barang');
+        $sheet->setCellValue('D1', 'Stock');
+        $sheet->setCellValue('E1', 'Deskripsi lokasi');
+        $sheet->setCellValue('F1', 'Jenis Kendaraan');
+
+        // Populate the data rows
+        $row = 2;
+        foreach ($barangData as $index => $brg) {
+            $sheet->setCellValue('A' . $row, $index + 1);
+            $sheet->setCellValue('B' . $row, $brg['id_barang']);
+            $sheet->setCellValue('C' . $row, $brg['nama']);
+            $sheet->setCellValue('D' . $row, $brg['stok']);
+            $sheet->setCellValue('E' . $row, $brg['deskripsi']);
+            $sheet->setCellValue('F' . $row, $brg['kendaraan']);
+            $row++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'Stok_' . date('d-m-Y') . '.xlsx';
+        $temp_file = tempnam(sys_get_temp_dir(), $filename);
+        $writer->save($temp_file);
+
+        return response()->download($temp_file, $filename)->deleteFileAfterSend(true);
     }
 }

@@ -104,7 +104,6 @@
                 });
             });
 
-
             document.getElementById('exportForm').addEventListener('submit', function(event) {
                 const barangData = [];
                 document.querySelectorAll('tbody tr').forEach(row => {
@@ -126,7 +125,7 @@
                         selisih
                     });
                 });
-
+                
                 document.getElementById('barangData').value = JSON.stringify(barangData);
             });
         });

@@ -33,13 +33,13 @@ Route::group(['middleware'=>'auth'],function () {
         Route::put('/edit/{id}', [BarangController::class, 'barangedit'])->name('barangedit');
         Route::delete('/hapus/{id}', [BarangController::class, 'baranghapus'])->name('baranghapus');
         Route::post('/paginate', [BarangController::class, 'paginate'])->name('paginate');
-        Route::get('/export', [BarangController::class, 'barangexport'])->name('barangexport');
+        Route::post('/barangexport', [BarangController::class, 'barangexport'])->name('barangexport');
     });
 
     // Route to opname
     Route::prefix('opname')->group(function () {
         Route::get('/', [OpnameController::class, 'opnametampil'])->name('opnametampil');
-        Route::post('/export', [OpnameController::class, 'export'])->name('opnameexport');
+        Route::post('/opnameexport', [OpnameController::class, 'export'])->name('opnameexport');
     });
 
     // Route to barang masuk
