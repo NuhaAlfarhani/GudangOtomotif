@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\KeluarModel;
 use App\Models\BarangModel;
-use Carbon\Carbon;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class KeluarController extends Controller
 {
@@ -63,5 +64,40 @@ class KeluarController extends Controller
         // dd($keluar);
 
         return view('page/keluar', compact('keluar'), ['barang' => $databarang]);
+    }
+
+    // export data keluar
+    public function keluarexport(Request $request)
+    {
+        $barangData = KeluarModel::with('barang')->get();
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->setCellValue('A1', 'Nomor');
+        $sheet->setCellValue('B1', 'PKB');
+        $sheet->setCellValue('C1', 'Kode Barang');
+        $sheet->setCellValue('D1', 'Nama Barang');
+        $sheet->setCellValue('E1', 'Jumlah');
+        $sheet->setCellValue('F1', 'Jenis Kendaraan');
+        $sheet->setCellValue('G1', 'Tanggal Keluar');
+
+        $row = 2;
+        foreach($barangData as $index => $brg){
+            $sheet->setCellValue('A'.$row, $index + 1);
+            $sheet->setCellValue('B'.$row, $brg->PKB);
+            $sheet->setCellValue('C'.$row, $brg->barang->id_barang);
+            $sheet->setCellValue('D'.$row, $brg->barang->nama);
+            $sheet->setCellValue('E'.$row, $brg->jumlah);
+            $sheet->setCellValue('F'.$row, $brg->barang->kendaraan);
+            $sheet->setCellValue('G'.$row, $brg->created_at);
+            $row++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'Barang Keluar_' . date('d-m-Y') . '.xlsx';
+        $temp_file = tempnam(sys_get_temp_dir(), $filename);
+        $writer->save($temp_file);
+
+        return response()->download($temp_file, $filename)->deleteFileAfterSend(true);
     }
 }

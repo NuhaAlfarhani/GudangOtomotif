@@ -6,19 +6,25 @@
             @include('components.alert')
 
             <div class="container-fluid">
-                <div class="breadcrumb mb-4">
+                <div class="breadcrumb mb-4 d-flex justify-content-between align-items-center">
                     <h2>
                         Barang Keluar Warehouse
                     </h2>
 
-                    <div class="card-header">
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDataTambah">
-                            Tambah Data
-                        </button>
+                    <div class="d-flex">
+                        <div class="card-header mr-2">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalDataTambah">
+                                Tambah Data
+                            </button>
+                        </div>
                         
-                        <button type="button" class="btn btn-info">
-                            Export Data
-                        </button>
+                        <div>
+                            <form id="exportForm" action="{{ route('keluarexport') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="keluarexport" id="barangData">
+                                <button type="submit" class="btn btn-info">Export Data</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 
