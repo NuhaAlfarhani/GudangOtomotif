@@ -148,7 +148,7 @@
                                     <select id="id_barang" name="id_barang" class="form-control" required>
                                         <option value="">Pilih Barang</option>
                                         @foreach ($barang as $item)
-                                            <option value="{{ $item->id_barang }}">{{ $item->nama }}</option>
+                                            <option value="{{ $item->id_barang }}">{{ $item->id_barang }} - {{ $item->nama}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -185,6 +185,4 @@
             </div>   
         </div>
     </div>
-
-    
 @endsection
