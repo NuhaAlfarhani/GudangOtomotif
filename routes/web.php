@@ -49,6 +49,7 @@ Route::group(['middleware'=>'auth'],function () {
         Route::post('/tambah', [MasukController::class, 'masuktambah'])->name('masuktambah');
         Route::delete('/hapus/{id_masuk}', [MasukController::class, 'masukhapus'])->name('masukhapus');
         Route::get('/cari', [MasukController::class, 'masukcari'])->name('masukcari');
+        Route::post('/masukexport', [MasukController::class, 'masukexport'])->name('masukexport');
     });
 
     // Route to barang keluar

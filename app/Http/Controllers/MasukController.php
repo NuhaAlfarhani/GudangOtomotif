@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\MasukModel;
 use App\Models\BarangModel;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class MasukController extends Controller
 {
@@ -61,11 +63,39 @@ class MasukController extends Controller
         return view('page/masuk', compact('masuk'), ['barang' => $databarang]);
     }
 
-    public function search(Request $request)
+    // export data masuk
+    public function masukexport(Request $request)
     {
-        $search = $request->input('search');
-        $masuk = MasukModel::where('name', 'like', '%' . $search . '%')
-        ->get();
-        return response()->json($masuk);
+        $barangData = MasukModel::with('barang')->get();
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Set the header row
+        $sheet->setCellValue('A1', 'Nomor');
+        $sheet->setCellValue('B1', 'Kode Barang');
+        $sheet->setCellValue('C1', 'Nama Barang');
+        $sheet->setCellValue('D1', 'Jumlah');
+        $sheet->setCellValue('E1', 'Jenis Kendaraan');
+        $sheet->setCellValue('F1', 'Tanggal');
+
+        // Populate the data rows
+        $row = 2;
+        foreach ($barangData as $index => $brg) {
+            $sheet->setCellValue('A' . $row, $index + 1);
+            $sheet->setCellValue('B' . $row, $brg->id_barang);
+            $sheet->setCellValue('C' . $row, $brg->barang->nama);
+            $sheet->setCellValue('D' . $row, $brg->jumlah);
+            $sheet->setCellValue('E' . $row, $brg->barang->kendaraan);
+            $sheet->setCellValue('F' . $row, $brg->created_at);
+            $row++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $fileName = 'Barang Masuk_' . date('d-m-Y') . '.xlsx';
+        $temp_file = tempnam(sys_get_temp_dir(), $fileName);
+        $writer->save($temp_file);
+
+        return response()->download($temp_file, $fileName)->deleteFileAfterSend(true);
     }
 }
